@@ -1,0 +1,81 @@
+# FILE
+
+file:
+  ignore_pattern: .git log .bundle .gif .png .jpg .jpeg .ico
+
+new:
+  help: Create a new file. Uses Panel to allow navigation and completion of path. Creates any folders that don not exist
+  key: CTRL+N
+
+open:
+  help: Shows Panel and allows a pattern to be entered to select and open a file
+  key: CTRL+O
+
+rename:
+  help: Rename or move a file. Opens Panel with file path. Make any adjustments and press ENTER
+  key: F2
+
+close:
+  help: Closes an open file
+  key: CTRL+W
+
+list:
+  help: Switch between open files. Like an ALT+TAB window switcher holding down <modifiers> keeps the list open while pressing <key> cycles through it.
+  key: CTRL+TAB
+
+# SEARCH
+
+find:
+  help: Find and replace. Uses grep to search the project
+  key: CTRL+F
+
+goto:
+  help: Opens Panel and allows a line number to be entered
+  key: CTRL+L
+
+# EDIT
+
+undo:
+  help: Undoes a keystroke or several if previously entered quickly (key cannot be reassigned)
+  key: CTRL+Z
+
+redo:
+  help: Redoes the previously undone key or keys (key cannot be reassigned)
+  key: CTRL+SHIFT+Z
+
+cut:
+  help: Cuts the selected text and stores it in the clipboard
+  key: CTRL+X
+
+copy:
+  help: Copies the selected text to the clipboard
+  key: CTRL+C
+
+paste:
+  help: Pastes text from the clipboard at the current cursor position
+  key: CTRL+V
+
+delete:
+  help: Remove the selected text
+  key: DELETE
+
+#TOOLS
+
+snippets:
+  help: Triggered by pressing TAB after some text. Cancelled by pressing ESC. Consecutive TAB presses cycles through variables. Same syntax as gEdit. Configured by going to snippets folder and opening the YAML file for the relevant file extension or editing the global.yml file.
+  key: TAB
+
+# HELP
+
+shortcuts:
+  help: Opens the shortcuts panel with helps
+  key: F1
+
+help:
+  help: Display help relevant to the selected word (Not implemented but the idea is to have context help looked up based on the filetype. Alternatively, It could just display a text entry field where a web like search is done on one of the rdoc or yard sites)
+  key: CTRL+F1
+
+about:
+  help: Opens panel and display information about the editor
+  key: CTRL+ALT+F1
+

@@ -1,0 +1,38 @@
+rubyonrails:
+  pattern: .rb .rake Rakefile Gemfile .ru
+  bang: ruby
+
+js:
+  pattern: .js
+
+haml:
+  pattern: .haml
+
+yaml:
+  pattern: .yaml .yml
+
+sass:
+  pattern: .sass
+
+markdown:
+  pattern: .md .markdown
+
+sql:
+  pattern: sql
+
+cucumber:
+  pattern: .feature
+
+html:
+  pattern: .html .htm
+
+css:
+  pattern: css
+
+sh:
+  pattern: .sh
+  bang: bash sh
+
+xml:
+  pattern: xml
+
