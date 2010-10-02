@@ -1,0 +1,3 @@
+file:
+  ignore_pattern: .git log .bundle .gif .png .jpg .jpeg .ico
+

@@ -7,5 +7,10 @@ require 'yaml'
 require 'bundler'
 Bundler.setup
 
+APP_NAME = "RailED"
+
+require_relative '../lib/config.rb'
+Config.load
+
 Application.initialize!
 
