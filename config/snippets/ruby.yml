@@ -1,0 +1,97 @@
+req: |
+  require '<file>'
+  <>
+
+load: |
+  load '<file>'
+  <>
+
+module: |
+  module <name>
+    <>
+  end
+
+class: |
+  class <name>
+    <>
+  end
+
+r: |
+  attr_reader :<attributes>
+
+w: |
+  attr_writer :<attributes>
+
+rw: |
+  attr_accessor :<attributes>
+
+cr: |
+  cattr_reader :<attributes>
+
+cw: |
+  cattr_writer :<attributes>
+
+crw: |
+  cattr_accessor :<attributes>
+
+map: |
+  map { |<element>| <> }
+
+inj: |
+  inject(<object>) { |<injection>, <element>| <> }
+
+rej: |
+  reject { |<element>| <element>.<> }
+
+sel: |
+  select { |<element>| <element>.<> }
+
+lam: |
+  lambda { |<args>| <> }
+
+def: |
+  def <name>
+    <>
+  end
+
+defs: |
+  self.def <name>
+    <>
+  end
+
+init: |
+  def initialize <params>
+    <>
+  end
+
+do: |
+  do
+    <>
+  end
+
+doo: |
+  do |<element>|
+    <>
+  end
+
+while: |
+  while <condition>
+    <>
+  end
+
+if: |
+  if <condition>
+    <>
+  end
+
+el: |
+  else
+    <>
+
+ei: |
+  elsif <condition>
+    <>
+
+yaml: |
+  <hash> = YAML.load File.open('<filename>')
+
