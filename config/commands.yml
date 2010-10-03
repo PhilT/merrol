@@ -49,6 +49,10 @@ test:
   help: Switches between code and spec or test. Works for models, views, controllers, helpers, lib, features and steps (maybe)
   key: CTRL+T
 
+diff:
+  help: Switches to a git diff of the file in the current window
+  key: CTRL+K
+
 # SEARCH
 
 find:
