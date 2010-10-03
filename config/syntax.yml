@@ -16,9 +16,13 @@ html:
 markdown:
   pattern: .md .markdown
 
-rubyonrails:
+ruby:
   pattern: .rb .rake Rakefile Gemfile .ru
   bang: ruby
+
+rubyonrails:
+  pattern: .rb .rake Rakefile
+  if: script/rails
 
 sh:
   pattern: .sh

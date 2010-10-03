@@ -21,9 +21,6 @@ quit:
   help: Exit editor (ALT+F4 should also work)
   key: CTRL+Q
 
-file:
-  ignore_pattern: .git log .bundle .gif .png .jpg .jpeg .ico
-
 new:
   help: Create a new file. Uses Panel to allow navigation and completion of path. Creates any folders that don not exist
   key: CTRL+N
@@ -61,6 +58,22 @@ find:
 line:
   help: Move to the line number entered
   key: CTRL+L
+
+top_left:
+  help: Switches to the top left source code window
+  key: ALT+1
+
+top_right:
+  help: Switches to the top right source code window
+  key: ALT+2
+
+bottom_left:
+  help: Switches to the bottom left source code window
+  key: ALT+3
+
+bottom_right:
+  help: Switches to the bottom right source code window
+  key: ALT+4
 
 # EDIT
 
