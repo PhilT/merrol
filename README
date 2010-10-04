@@ -14,13 +14,12 @@ Panels - A more flexible modaless way to accept input
 
 Why?
 ----------------------------------
-* Nothing like it exists
 * It's a different way of working that some people will hopefully find more productive
-* It focuses on doing one thing - making a good editor for Rails
+* It focuses on doing one thing - making a good editor for Rails and supporting languages but not getting in the way like an IDE
 * Alternatives and plugins are buggy or bloated
 * Ruby 1.9.2 is now stable and fast
 * New modules/functionality can be added easily
-* I want to see if I can work without a mouse (at least for editing code). Existing editors don't really allow this
+* I want to see if I can work without a mouse (at least for editing code). It doesn't seem possible in existing editors but that's because they weren't designed that way
 
 Roadmap
 ----------------------------------
@@ -86,5 +85,5 @@ map.editor "TAB" => 'smart_code', :when => {after_word?}
 map.editor "BACKSPACE" => 'dedent', :when => {previously_tabbed?}
 
 Title bar should show the project directory
-Then a bar at the top should should the full path of the currently view file. The language, column and line
+Then a bar at the top should show the full path of the currently loaded file, the language, column and line
 

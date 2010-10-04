@@ -4,11 +4,14 @@ commands:
   help: Opens this command help panel
   key: F1
 
+type:
+  help: Cycle help styles. Category, Name, Keyboard layout
+
 cancel:
   help: Cancels (and hides if a panel) file, list, help (this panel), snippets
 
 help:
-  help: Display help relevant to the selected word (Not implemented but the idea is to have context help looked up based on the filetype. Alternatively, It could just display a text entry field where a web like search is done on one of the rdoc or yard sites)
+  help: Display help relevant to the selected word and file type
   key: CTRL+F1
 
 about:
