@@ -14,6 +14,9 @@ Panels - A more flexible modaless way to accept input
 
 Why?
 ----------------------------------
+I noticed, while using gEdit (and in fact in other editors I've used) I found myself constantly re-arranging windows to get the optimum setup. I thought, "There must be a better way".
+
+Generally I want to use the maximum screen size available but I have a number of configurations I like to choose from. Sometimes I'll be editing a single file. Other times I need two open side-by-side.
 * It's a different way of working that some people will hopefully find more productive
 * It focuses on doing one thing - making a good editor for Rails and supporting languages but not getting in the way like an IDE
 * Alternatives and plugins are buggy or bloated
