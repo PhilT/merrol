@@ -29,11 +29,11 @@ new:
   key: CTRL+N
 
 open:
-  help: Shows Panel and allows a pattern to be entered to select and open a file
+  help: Shows Panel and allows a pattern to be entered to select and open a file. Characters are matched against the relative path. Spaces a wildcards.
   key: CTRL+O
 
 save:
-  help: Save and apply any reformatting modules that are enabled
+  help: Save and apply any reformatting modules
   key: CTRL+S
 
 rename:
@@ -117,4 +117,8 @@ delete_line:
 snippets:
   help: Triggered by pressing TAB after some text. ESC cancels. Press TAB to move to next variable. Same syntax as gEdit. Configured by going to snippets folder and opening the YAML file for the relevant file extension or editing the global.yml file.
   key: TAB
+
+config:
+  help: Reload configuration files located in config/ and subdirectories
+  key: CTRL+Y
 
