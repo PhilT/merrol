@@ -1,5 +1,6 @@
-require_relative('../spec_helper')
-require_relative('../../lib/config')
+require 'spec_helper'
+require 'lib/config'
+
 describe Config do
   before(:each) do
     Dir.stub!()

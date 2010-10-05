@@ -4,7 +4,7 @@ Minimalist Editor for Ruby, Rails and Other Languages
 
 What
 ----------------------------------
-An editor for Ruby, Rails and supporting langauges, written in Ruby with an open design to allow customization and easy maintainance.
+An editor for Ruby, Rails and supporting langauges, written in Ruby with an open design to allow customization and improvement.
 
 Why
 ----------------------------------
@@ -27,26 +27,4 @@ Robust - All built with well factored, well tested Ruby code
 No dialogs - Panels will allow a more versatible way to accept input
 
 Support multiple instances for loading different application directories
-
-(Planned) Features
-----------------------------------
-Autoload configuration (YAML files)
-Open file with fuzzy matcher (CTRL+O)
-Close file (CTRL+W)
-Multi-file switching (CTRL+TAB)
-Remove trailing space on save
-Bracket matching
-Snippets (Smart code tab completion)
-Find/Replace (CTRL+F)
-Multi-file find/replace (CTRL+SHIFT+F)
-Save window position
-Output window
-Integrated autospec
-
-rails generator snippets
-rcov - pretty test coverage output
-rspec - pretty html specs output
-Git support (do git add before reloading files? or between loads/saves?)
-rdoc - builtin help using rdoc - somehow for ruby as well
-handle really large files (e.g. SQL dump or log file. Probably turn off highlighting)
 

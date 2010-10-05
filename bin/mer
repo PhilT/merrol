@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'merrol'
+#begin
+  Merrol::Config.load
+  Merrol::Application.initialize!
+#rescue Merrol::MerrolError => e
+#  Merrol.error e.message
+#  Merrol.error e.backtrace.join("\n") if ENV["MERROL_DEBUG"]
+#  exit e.status_code
+#rescue Interrupt
+#  Merrol.error "\nQuitting..."
+#  exit 1
+#end
+

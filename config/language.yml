@@ -18,7 +18,7 @@ markdown:
 
 ruby:
   snippets: ruby rspec cucumber
-  pattern: .rb .rake Rakefile Gemfile .ru
+  pattern: .rb .rake Rakefile Gemfile .gemspec .ru
   bang: ruby
 
 rubyonrails:
