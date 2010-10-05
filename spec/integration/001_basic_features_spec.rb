@@ -20,8 +20,11 @@ describe 'Editor' do
     pressing 'CTRL+S'
     saves @the_contents + 'some text', :in => 'the_file'
 
-    pressing 'CTRL+Q'
-    quits
+    pressing 'CTRL+W'
+    closes the file
+    saves @the_contents + 'some text', :in => 'the_file'
+
+    quits by_pressing 'CTRL+Q'
   end
 end
 
