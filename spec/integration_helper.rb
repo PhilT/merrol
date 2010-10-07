@@ -1,4 +1,4 @@
-require 'gtk2'
+require 'spec_helper'
 
 # Like a single pass through Gtk.main but does not block allowing tests to finish
 def process_events
@@ -83,6 +83,4 @@ def quits_by_pressing key
   pressing key
   process_events
 end
-
-require_relative '../lib/merrol'
 

@@ -1,0 +1,119 @@
+help:
+  commands:
+    help: Opens this command help panel
+    key: F1
+
+  type:
+    help: Cycle help styles. Category, Name, Keyboard layout
+
+  cancel:
+    help: Cancels (and hides if a panel) file, list, help (this panel), snippets
+
+  help:
+    help: Display help relevant to the selected word and file type
+    key: CTRL+F1
+
+  about:
+    help: Opens panel and display information about the editor
+    key: CTRL+ALT+F1
+
+file:
+  new:
+    help: Create a new file. Uses Panel to allow navigation and completion of path. Creates any folders that don not exist
+    key: CTRL+N
+
+  open:
+    help: Shows Panel and allows a pattern to be entered to select and open a file. Characters are matched against the relative path. Spaces a wildcards.
+    key: CTRL+O
+
+  save:
+    help: Save and apply any reformatting modules
+    key: CTRL+S
+
+  rename:
+    help: Rename or move a file. Opens Panel with file path. Make any adjustments and press ENTER
+    key: CTRL+M
+
+  list:
+    help: Switch between open files. Like an ALT+TAB window switcher holding down <modifiers> keeps the list open while pressing <key> cycles through it.
+    key: CTRL+TAB
+
+  test:
+    help: Switches between code and spec or test. Works for models, views, controllers, helpers, lib, features and steps (maybe)
+    key: CTRL+T
+
+  diff:
+    help: Switches to a git diff of the file in the current window
+    key: CTRL+K
+
+  close:
+    help: Closes an open file
+    key: CTRL+W
+
+  quit:
+    help: Exit editor (ALT+F4 should also work)
+    key: CTRL+Q
+
+search:
+  find:
+    help: Find and replace. Uses grep to search the project
+    key: CTRL+F
+
+  line:
+    help: Move to the line number entered
+    key: CTRL+L
+
+  top_left:
+    help: Switches to the top left source code window
+    key: ALT+1
+
+  top_right:
+    help: Switches to the top right source code window
+    key: ALT+2
+
+  bottom_left:
+    help: Switches to the bottom left source code window
+    key: ALT+3
+
+  bottom_right:
+    help: Switches to the bottom right source code window
+    key: ALT+4
+
+edit:
+  undo:
+    help: Undoes a keystroke or several if previously entered quickly
+    key: CTRL+Z
+
+  redo:
+    help: Redoes the previously undone key or keys
+    key: CTRL+SHIFT+Z
+
+  cut:
+    help: Cuts the selected text and stores it in the clipboard
+    key: CTRL+X
+
+  copy:
+    help: Copies the selected text to the clipboard
+    key: CTRL+C
+
+  paste:
+    help: Pastes text from the clipboard at the current cursor position
+    key: CTRL+V
+
+  delete:
+    help: Remove the selected text
+    key: DELETE
+
+  delete_line:
+    help: Remove a while line and move following lines up
+    key: CTRL+D
+
+tools:
+  snippets:
+    help: Triggered by pressing TAB after some text. ESC cancels. Press TAB to move to next variable. Same syntax as gEdit. Configured by going to snippets folder and opening the YAML file for the relevant file extension or editing the global.yml file.
+    key: TAB
+
+  config:
+    help: Reload configuration files located in config/ and subdirectories
+    key: CTRL+Y
+

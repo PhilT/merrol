@@ -4,7 +4,9 @@ require 'yaml'
 
 APP_NAME = "Merrol"
 
-Dir["#{File.dirname(__FILE__)}/merrol/**/*.rb"].each { |file| require(file) }
+$LOAD_PATH << 'lib/merrol'
+require 'command_dispatcher'
+require 'window'
 
 Window.new(APP_NAME)
 
