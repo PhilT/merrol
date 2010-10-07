@@ -52,6 +52,7 @@ end
 def entering text, options = {}
   widget = find_widget options[:into]
   widget.insert_text text, widget.position
+  process_events
 end
 
 # EXPECTATIONS
@@ -77,7 +78,11 @@ def saves contents, file
 end
 
 # e.g. quits
-def quits
-
+def quits_by_pressing key
+  Gtk.should_receive(:main_quit)
+  pressing key
+  process_events
 end
+
+require_relative '../lib/merrol'
 

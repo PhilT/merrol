@@ -31,7 +31,7 @@ describe 'Editor' do
     closes the file
     saves @the_contents + 'some text', :in => 'the_file'
 
-    quits by_pressing 'CTRL+Q'
+    quits_by_pressing 'CTRL+Q'
   end
 end
 
