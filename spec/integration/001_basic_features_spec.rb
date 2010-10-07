@@ -30,8 +30,6 @@ describe 'Editor' do
     pressing 'CTRL+W'
     closes the file
     saves @the_contents + 'some text', :in => 'the_file'
-
-    quits_by_pressing 'CTRL+Q'
   end
 end
 
