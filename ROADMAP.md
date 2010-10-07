@@ -1,4 +1,4 @@
-
+Basic Framework
 Autoload configuration (YAML files)
 Open file with fuzzy matcher (CTRL+O)
 Close file (CTRL+W)

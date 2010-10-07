@@ -1,10 +1,17 @@
+require 'integration_helper'
+
 describe 'Editor' do
   before(:each) do
     @the_contents = 'Some prewritten text. '
     create_file 'the_file', :containing => @the_contents
   end
 
+  after(:each) do
+    destroy_file 'the_file'
+  end
+
   it 'can load and save a file' do
+    pending
     pressing 'CTRL+O'
     shows 'open'
 

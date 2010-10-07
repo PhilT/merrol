@@ -1,17 +1,22 @@
+desc 'runs the specs'
 task :spec do
   system 'rspec spec'
 end
 
-task :build => :spec do
-  system 'gem build .gemspec'
+desc 'builds the gem'
+task :build do
+  system 'gem build merrol.gemspec'
 end
 
-task :install => :build do
+desc 'installs the gem'
+task :install do
   system 'gem install merrol-0.0.0.gem'
 end
 
 desc 'build, install and run the gem'
-task :run => :install do
+task :run do
   system "mer"
 end
+
+task :default => [:spec, :build, :install, :run]
 

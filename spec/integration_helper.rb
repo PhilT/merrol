@@ -1,3 +1,5 @@
+require 'gtk2'
+
 # Like a single pass through Gtk.main but does not block allowing tests to finish
 def process_events
   while Gtk.events_pending?
@@ -17,6 +19,17 @@ rescue
 end
 
 # ACTIONS
+
+# e.g. create_file 'the_file', :containing => @the_contents
+def create_file name, options
+  File.open(name, "w") do |f|
+    f.puts options[:containing]
+  end
+end
+
+def destroy_file name
+  File.delete(name)
+end
 
 # e.g. pressing 'CTRL+S'
 def pressing key, options = {}
