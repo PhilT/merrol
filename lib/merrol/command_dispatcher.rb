@@ -8,14 +8,14 @@ module CommandDispatcher
       @commands = {}
       @help.each do |name, category|
         category.each do |command, detail|
-          @commands[detail['key']] = command
+          @commands[detail['key']] = [command, detail['help']]
         end
       end
     end
 
     def handle key
       if @commands[key]
-        self.send(@commands[key])
+        self.send(@commands[key].first)
         true
       else
         false

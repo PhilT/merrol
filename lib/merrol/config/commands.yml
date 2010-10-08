@@ -20,7 +20,7 @@ file:
     key: CTRL+N
 
   open:
-    help: Shows Panel and allows a pattern to be entered to select and open a file. Characters are matched against the relative path. Spaces a wildcards.
+    help: Shows Panel and allows a pattern to be entered to select and open a file. Characters are matched against the relative path. Spaces a wildcards. New files can also be created from here.
     key: CTRL+O
 
   save:
@@ -32,16 +32,8 @@ file:
     key: CTRL+M
 
   list:
-    help: Switch between open files. Like an ALT+TAB window switcher holding down <modifiers> keeps the list open while pressing <key> cycles through it.
+    help: Switch between open files. Like an ALT+TAB window switcher holding down CTRL keeps the list open while pressing TAB cycles through it.
     key: CTRL+TAB
-
-  test:
-    help: Switches between code and spec or test. Works for models, views, controllers, helpers, lib, features and steps (maybe)
-    key: CTRL+T
-
-  diff:
-    help: Switches to a git diff of the file in the current window
-    key: CTRL+K
 
   close:
     help: Closes an open file
@@ -101,7 +93,7 @@ edit:
     help: Remove the selected text
     key: DELETE
 
-  delete_line:
+  del_line:
     help: Remove a while line and move following lines up
     key: CTRL+D
 
@@ -110,11 +102,33 @@ tools:
     help: Triggered by pressing TAB after some text. ESC cancels. Press TAB to move to next variable. Same syntax as gEdit. Configured by going to snippets folder and opening the YAML file for the relevant file extension or editing the global.yml file.
     key: TAB
 
+  test:
+    help: Switches between code and spec or test. Works for models, views, controllers, helpers, lib, features and steps (maybe)
+    key: CTRL+T
+
+  diff:
+    help: Switches to a git diff of the file in the current window
+    key: CTRL+K
+
   snippets:
     help: Opens the snippets file(s) related to the current file being edited
     key: CTRL+J
 
-  reconfigure:
+  reload:
     help: Reload configuration files located in config/ and subdirectories
     key: CTRL+Y
+
+  error:
+    help: Goto to last error
+    key: CTRL+E
+
+settings:
+  numbers:
+    help: Toggle line numbers
+    key: CTRL+SHIFT+L
+
+general:
+  cancel:
+    help: Cancels (and hides) any open panels and returns to the last focused window
+    key: ESC
 
