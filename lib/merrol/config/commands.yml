@@ -1,16 +1,13 @@
 help:
   commands:
-    help: Opens this command help panel
+    help: Opens this command help panel (Subsequent presses cycles through different sort orders)
     key: F1
-
-  type:
-    help: Cycle help styles. Category, Name, Keyboard layout
 
   cancel:
     help: Cancels (and hides if a panel) file, list, help (this panel), snippets
 
   help:
-    help: Display help relevant to the selected word and file type
+    help: Displays keyboard layout help. Cancels when CTRL key is released
     key: CTRL+F1
 
   about:
@@ -109,11 +106,15 @@ edit:
     key: CTRL+D
 
 tools:
-  snippets:
+  complete:
     help: Triggered by pressing TAB after some text. ESC cancels. Press TAB to move to next variable. Same syntax as gEdit. Configured by going to snippets folder and opening the YAML file for the relevant file extension or editing the global.yml file.
     key: TAB
 
-  config:
+  snippets:
+    help: Opens the snippets file(s) related to the current file being edited
+    key: CTRL+J
+
+  reconfigure:
     help: Reload configuration files located in config/ and subdirectories
     key: CTRL+Y
 
