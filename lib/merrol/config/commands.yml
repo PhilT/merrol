@@ -1,26 +1,38 @@
+# Shortcuts must be written in the correct order and must be all uppercase
+# 1. CTRL (Optional)
+# 2. ALT (Optional)
+# 3. SHIFT (Optional)
+# 4. key (Mandatory)
+# example: CTRL+ALT+SHIFT+K
+# Special keys:
+#   ESC, TAB, CAPS_LOCK, BACKSPACE, ENTER
+#   INSERT, DELETE, HOME, END, PAGE_UP, PAGE_DOWN, PAUSE
+#   UP, DOWN, LEFT, RIGHT
+
+
 help:
   commands:
-    help: Opens this command help panel (Subsequent presses cycles through different sort orders)
+    help: Opens command help panel (Subsequent presses cycle through different sort orders)
     key: F1
 
   cancel:
-    help: Cancels (and hides if a panel) file, list, help (this panel), snippets
+    help: Cancels (and hides if applicable) file, list, help, snippets
 
   help:
     help: Displays keyboard layout help. Cancels when CTRL key is released
     key: CTRL+F1
 
   about:
-    help: Opens panel and display information about the editor
-    key: CTRL+ALT+F1
+    help: Displays information about the editor
+    key: CTRL+SHIFT+F1
 
 file:
   new:
-    help: Create a new file. Uses Panel to allow navigation and completion of path. Creates any folders that don not exist
+    help: Shows file create panel. Allow navigation and completion of path. Creates any folders that do not exist
     key: CTRL+N
 
   open:
-    help: Shows Panel and allows a pattern to be entered to select and open a file. Characters are matched against the relative path. Spaces a wildcards. New files can also be created from here.
+    help: Shows open panel and allows a pattern to be entered to select and open a file. Characters are matched against the relative path. Spaces are wildcards. New files can also be created from here.
     key: CTRL+O
 
   save:
@@ -28,7 +40,7 @@ file:
     key: CTRL+S
 
   rename:
-    help: Rename or move a file. Opens Panel with file path. Make any adjustments and press ENTER
+    help: Rename or move a file. Opens panel with file path. Make any adjustments and press ENTER
     key: CTRL+M
 
   list:

@@ -13,6 +13,7 @@ Find/Replace (CTRL+F)
 Multi-file find/replace (CTRL+SHIFT+F)
 Output window
 Integrated autospec
+Mouse support will be added for functions that really do benefit (e.g. file browsing?) after keyboard support has been completed
 
 rails generator snippets
 rcov - pretty test coverage output
