@@ -1,7 +1,7 @@
 class Window < Gtk::Window
   include CommandDispatcher
 
-  def initialize(title)
+  def initialize(title, filepaths)
     super(title)
     load_commands
 
@@ -20,8 +20,14 @@ class Window < Gtk::Window
 
     signal_connect('destroy') do
       save_state
-      Gtk.main_quit
+      false
     end
+
+    view = Gtk::SourceView.new
+    view.name = 'view'
+    load_files(filepaths, view)
+    add(view)
+
     show_all
   end
 
@@ -30,7 +36,11 @@ class Window < Gtk::Window
   end
 
   def save_state
+    Gtk.main_quit
+  end
 
+  def load_files filepaths, view
+    view.buffer.text = File.read(filepaths.first) if filepaths.first
   end
 end
 

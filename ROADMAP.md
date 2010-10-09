@@ -1,11 +1,12 @@
 Basic Framework
-Save window position
-Show Keyboard shortcuts
-Autoload configuration (YAML files)
+Open file from commandline with relative path
 Open file in the current window with fuzzy matcher (CTRL+O)
+Autoload configuration (YAML files)
 Close file (CTRL+W)
 Multi-file switching (CTRL+TAB)
 Remove trailing space (on save)
+Save window position
+Show Keyboard shortcuts
 Single blank line at end of file (on save)
 Bracket matching
 Snippets (Smart code tab completion)

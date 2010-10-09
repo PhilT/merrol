@@ -8,5 +8,3 @@ $LOAD_PATH << 'lib/merrol'
 require 'command_dispatcher'
 require 'window'
 
-Window.new(APP_NAME)
-

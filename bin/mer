@@ -2,5 +2,6 @@
 
 require 'merrol'
 
+Window.new(APP_NAME, ARGV)
 Gtk.main
 

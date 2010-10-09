@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'spec_helper' unless defined?(APP_NAME)
 
 # Like a single pass through Gtk.main but does not block allowing tests to finish
 def process_events
@@ -8,14 +8,15 @@ def process_events
 end
 
 # e.g. find_widget :named => 'something'
-def find_widget name
+def find_widget path
   widget = Gtk::Window.toplevels.first
-  name.split('.').each do |name|
+  path.split('.').each do |name|
     widget = widget.children.select{|child| child.name == name}.first
+    raise "Cannot find widget: #{path}" unless widget
   end
   widget
-rescue
-  puts "Cannot find widget: #{options[:named]}. Failed on children of #{name}"
+rescue name = ''
+  raise "Cannot find widget: #{path}. Failed on children of #{name}"
 end
 
 # ACTIONS
@@ -23,7 +24,7 @@ end
 # e.g. create_file 'the_file', :containing => @the_contents
 def create_file name, options
   File.open(name, "w") do |f|
-    f.puts options[:containing]
+    f.print options[:containing]
   end
 end
 
@@ -64,7 +65,9 @@ end
 
 # e.g. displays 'the_file', :in => 'open.results'
 def displays text, options = {}
-  options[:in].text.should == text
+  widget = find_widget(options[:in])
+  buffer = widget.is_a?(Gtk::TextView) ? widget.buffer : widget
+  buffer.text.should == text
 end
 
 # e.g. loads :into => 'editor'
