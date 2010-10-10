@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'merrol'
-
-Window.new(WORKING_DIR, ARGV)
-Gtk.main
-

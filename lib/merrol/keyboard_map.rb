@@ -2,7 +2,7 @@ require 'gtk2'
 require 'gtksourceview2'
 require 'yaml'
 require_relative 'command_dispatcher'
-include CommandDispatcher
+include Merrol::CommandDispatcher
 load_commands
 
 window = Gtk::Window.new "Keyboard Shortcuts"

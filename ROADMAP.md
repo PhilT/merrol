@@ -1,5 +1,4 @@
-Basic Framework
-Open file from commandline with relative path
+File save (CTRL+S)
 Open file in the current window with fuzzy matcher (CTRL+O)
 Autoload configuration (YAML files)
 Close file (CTRL+W)

@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'merrol'
+
+module Merrol
+  Window.new(WORKING_DIR, ARGV)
+  Gtk.main
+end
+
