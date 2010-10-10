@@ -51,10 +51,6 @@ file:
     help: Closes an open file
     key: CTRL+W
 
-  quit:
-    help: Exit editor (ALT+F4 should also work)
-    key: CTRL+Q
-
 search:
   find:
     help: Find and replace. Uses grep to search the project
@@ -101,6 +97,10 @@ edit:
     help: Pastes text from the clipboard at the current cursor position
     key: CTRL+V
 
+  select:
+    help: Selects all text in current window
+    key: CTRL+A
+
   delete:
     help: Remove the selected text
     key: DELETE
@@ -134,12 +134,15 @@ tools:
     help: Goto to last error
     key: CTRL+E
 
-settings:
+application:
   numbers:
     help: Toggle line numbers
     key: CTRL+SHIFT+L
 
-general:
+  quit:
+    help: Exit editor (ALT+F4 should also work)
+    key: CTRL+Q
+
   cancel:
     help: Cancels (and hides) any open panels and returns to the last focused window
     key: ESC

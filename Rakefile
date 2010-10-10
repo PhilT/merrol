@@ -8,15 +8,23 @@ task :build do
   system 'gem build merrol.gemspec'
 end
 
-desc 'installs the gem'
-task :install do
+desc 'builds and installs the gem'
+task :install => :build do
   system 'gem install merrol-0.0.0.gem'
 end
 
-desc 'build, install and run the gem'
+desc 'run local app'
 task :run do
-  system "mer"
+  require_relative 'lib/merrol'
+  Window.new(WORKING_DIR, [])
+  Gtk.main
 end
 
-task :default => [:spec, :build, :install, :run]
+desc 'runs gem version of app'
+task :mer do
+  system 'mer'
+end
+
+desc 'tests, builds, installs and runs the app'
+task :default => [:spec, :build, :install, :mer]
 
