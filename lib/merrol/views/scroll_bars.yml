@@ -1,0 +1,9 @@
+scroll_bars:
+  type: ScrolledWindow
+  add_to: MainView
+  expand: true
+  fill: true
+  padding: 1
+  hscrollbar_policy: POLICY_AUTOMATIC # show horizontal scrollbar: POLICY_NEVER, POLICY_AUTOMATIC, POLICY_ALWAYS
+  vscrollbar_policy: POLICY_AUTOMATIC # show vertical scrollbar: POLICY_NEVER, POLICY_AUTOMATIC, POLICY_ALWAYS
+

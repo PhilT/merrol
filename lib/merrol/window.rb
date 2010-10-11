@@ -8,6 +8,8 @@ module Merrol
       load_commands
 
       set_default_size(800, 600)
+      self.icon = File.app_relative('data/merrol.svg')
+
       signal_connect('key_press_event') do |w, e|
         keys = []
         keys << "CTRL" if e.state.control_mask?
@@ -36,13 +38,24 @@ module Merrol
       @fileinfo = Gtk::Label.new
       statusbar.pack_start(@fileinfo, false, false)
 
+      editor_yaml = YAML.load(File.open(File.join(File.dirname(__FILE__), "views/editor.yml")))['editor']
+      view = nil
+      editor_yaml.each do |key, value|
+        if key == 'type'
+          view = eval('Gtk::' + value).new
+        elsif value.is_a?(Hash)
+          view.send("#{key}=", eval("Gtk::#{value['type']}::#{value['value']}"))
+        elsif key == 'add_to'
+          #not implemented
+        else
+          view.send("#{key}=", value)
+        end
+      end
 
-      view = SourceView.new
-      load_files(filepaths, view.gtk)
-
+      load_files(filepaths, view)
 
       vbox.pack_start(statusbar, false, true, 1)
-      view.add_to vbox
+      vbox.pack_start(view, true, true, 1)
       add(vbox)
 
       show_all

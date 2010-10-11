@@ -1,0 +1,26 @@
+editor:
+  type: SourceView
+  add_to: ScrollBars
+  auto_indent: true
+  draw_spaces:
+    type: SourceView
+    value: DRAW_SPACES_ALL # DRAW_SPACES_SPACE | DRAW_SPACES_TAB | DRAW_SPACES_NEWLINE | DRAW_SPACES_NBSP | DRAW_SPACES_LEADING | DRAW_SPACES_TEXT | DRAW_SPACES_TRAILING, DRAW_SPACES_ALL
+  highlight_current_line: true
+  indent_on_tab: true
+  indent_width: 2
+  insert_spaces_instead_of_tabs: true
+  right_margin_position: 120
+  show_line_marks: true
+  show_line_numbers: true
+  show_right_margin: true
+  smart_home_end:
+    type: SourceView
+    value: SMART_HOME_END_BEFORE # SMART_HOME_END_BEFORE, SMART_HOME_END_BEFORE, SMART_HOME_END_BEFORE
+  tab_width: 2
+  wrap_mode:
+    type: TextTag
+    value: WRAP_WORD # WRAP_NONE, WRAP_CHAR, WRAP_WORD, WRAP_WORD_CHAR
+  theme: config/styles/Railscasts
+  language: rubyonrails
+  font: monospace 9
+
