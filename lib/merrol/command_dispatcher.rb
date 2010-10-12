@@ -20,7 +20,6 @@ module Merrol
       key = keys.join('+')
       if @commands[key]
         self.send(@commands[key].first)
-        true
       else
         false
       end

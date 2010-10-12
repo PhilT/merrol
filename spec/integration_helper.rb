@@ -1,4 +1,6 @@
-require 'spec_helper' unless defined?(APP_NAME)
+require 'spec_helper'
+
+Application.start_in WORKING_DIR, []
 
 # Like a single pass through Gtk.main but does not block allowing tests to finish
 def process_events
@@ -36,13 +38,13 @@ end
 def pressing key, options = {}
   key = 'Return' if key == 'ENTER'
   widget = options[:in] || Gtk::Window.toplevels.first
+  widget.grab_focus
   event = Gdk::EventKey.new(Gdk::Event::KEY_PRESS)
   event.window = widget
   event.state |= Gdk::Window::CONTROL_MASK if key =~ /CTRL+/
   event.state |= Gdk::Window::MOD1_MASK if key =~ /ALT+/
   event.state |= Gdk::Window::SHIFT_MASK if key =~ /SHIFT+/
   event.keyval = Gdk::Keyval.from_name(key.split('+').last)
-  widget.grab_focus
   event.send_event = true
   entry = Gdk::Keymap.default.get_entries_for_keyval(event.keyval).first
   event.hardware_keycode = entry[0]

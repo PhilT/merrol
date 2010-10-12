@@ -29,7 +29,7 @@ protected
     end
 
     def complete
-
+      false
     end
 
     def quit
