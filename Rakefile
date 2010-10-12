@@ -18,7 +18,7 @@ desc 'run local app'
 task :run do
   require_relative 'lib/merrol'
   module Merrol
-    Application.start_from WORKING_DIR, []
+    Application.start_in WORKING_DIR, []
     Gtk.main
   end
 end

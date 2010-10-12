@@ -10,7 +10,14 @@ module Merrol
       end
     end
 
-    def handle key
+    def handle e
+      keys = []
+      keys << "CTRL" if e.state.control_mask?
+      keys << "ALT" if e.state.mod1_mask?
+      keys << "SHIFT" if e.state.shift_mask?
+      unmodified_keyval = Gdk::Keymap.default.lookup_key(e.hardware_keycode, 0, 0)
+      keys << Gdk::Keyval.to_name(unmodified_keyval).upcase
+      key = keys.join('+')
       if @commands[key]
         self.send(@commands[key].first)
         true

@@ -5,12 +5,8 @@ require 'yaml'
 APP_NAME = "Merrol"
 WORKING_DIR = Dir.getwd
 
-$LOAD_PATH << 'lib/merrol'
-require 'gtk/widget'
-require 'gtk/window'
-require 'gtk/source_view'
-require 'file'
-require 'command_dispatcher'
-require 'config'
-require 'application'
+require "#{File.dirname(__FILE__)}/merrol/command_dispatcher"
+merrol_path = "#{File.dirname(__FILE__)}/merrol/**/*.rb"
+to_include = Dir[merrol_path]
+to_include.each { |file| require file unless file.include?('keyboard_map') }
 
