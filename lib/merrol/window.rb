@@ -1,14 +1,14 @@
 module Merrol
   class Window < Gtk::Window
-    include CommandDispatcher
+#    include CommandDispatcher
 
 
     def initialize(title, filepaths)
       super(title)
-      load_commands
+#      load_commands
 
-      set_default_size(800, 600)
-      self.icon = File.app_relative('data/merrol.svg')
+#      set_default_size(800, 600)
+#      self.icon = File.app_relative('data/merrol.svg')
 
       signal_connect('key_press_event') do |w, e|
         keys = []
@@ -27,11 +27,11 @@ module Merrol
   #      @buffers.modified.any? ? panel.warning :modified; true : false
   #    end
 
-      signal_connect('destroy') do
-        save_state
-        false
-      end
-
+#      signal_connect('destroy') do
+#        save_state
+#        false
+#      end
+=begin
       vbox = Gtk::VBox.new
 
       statusbar = Gtk::HBox.new
@@ -59,8 +59,9 @@ module Merrol
       add(vbox)
 
       show_all
+=end
     end
-
+=begin
     def complete
 
     end
@@ -79,6 +80,7 @@ module Merrol
         @fileinfo.text = filepaths.first
       end
     end
+=end
   end
 end
 

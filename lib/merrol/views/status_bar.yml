@@ -1,0 +1,7 @@
+layout:
+  type: HBox
+  add_to: MainView
+  expand: true
+  fill: true
+  padding: 1
+

@@ -1,6 +1,8 @@
-editor:
+layout:
   type: SourceView
   add_to: ScrollBars
+
+options:
   auto_indent: true
   draw_spaces:
     type: SourceView
