@@ -42,8 +42,8 @@ protected
 
     def load_files filepaths, view
       if filepaths.first
-        view.buffer.text = File.read(filepaths.first)
-        @fileinfo.text = filepaths.first
+        @widgets['editor'].buffer.text = File.read(filepaths.first)
+        @widgets['file_path'].text = filepaths.first
       end
     end
   end

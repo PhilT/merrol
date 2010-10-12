@@ -4,11 +4,11 @@ describe 'Editor' do
   before(:each) do
     @the_contents = 'Some prewritten text. '
     create_file 'the_file', :containing => @the_contents
+    Gtk::Window.toplevels.each { |window| window.destroy }
   end
 
   after(:each) do
     destroy_file 'the_file'
-    Gtk::Window.toplevels.each { |window| window.stub!(:save_state); window.destroy }
   end
 
   it 'loads a file from the commandline' do

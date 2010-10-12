@@ -11,7 +11,7 @@ module Merrol
           if key == 'type'
             widget = eval('Gtk::' + value).new
           elsif value.is_a?(Hash)
-            widget.send("#{key}=", eval(['Gtk', value['type'], value['value']].compact.join('::')))
+            widget.send("#{key}=", constants_from(value))
           elsif key == 'add_to'
             add_to = widgets[value]
           elsif %w(expand fill padding).include?(key)
@@ -33,6 +33,14 @@ module Merrol
         widgets[view_name] = widget
       end
       widgets
+    end
+
+    def self.constants_from value
+      type = value['type']
+      value = value['value']
+      value = [value] unless value.is_a?(Array)
+
+      eval(value.map{ |v| ['Gtk', type, v].compact.join('::') }.join(' | '))
     end
   end
 end

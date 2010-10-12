@@ -3,4 +3,5 @@ layout:
   add_to: status_bar
 
 options:
+  font: arial 8
 

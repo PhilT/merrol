@@ -1,6 +1,11 @@
 require 'spec_helper'
 
-Application.start_in WORKING_DIR, []
+class Application
+  def save_state
+  end
+end
+
+application = Application.start_in WORKING_DIR, []
 
 # Like a single pass through Gtk.main but does not block allowing tests to finish
 def process_events
@@ -84,7 +89,7 @@ end
 
 # e.g. quits
 def quits_by_pressing key
-  Gtk.should_receive(:main_quit)
+  application.should_receive(:quit)
   pressing key
   process_events
 end

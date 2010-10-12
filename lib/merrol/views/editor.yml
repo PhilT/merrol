@@ -17,13 +17,13 @@ options:
   show_right_margin: true
   tab_width: 2
 
-  # Add any of the following separated with a pipe symbol (|) or just use DRAW_SPACES_ALL
-  # DRAW_SPACES_SPACE | DRAW_SPACES_TAB | DRAW_SPACES_NEWLINE |
-  # DRAW_SPACES_NBSP | DRAW_SPACES_LEADING | DRAW_SPACES_TEXT |
-  # DRAW_SPACES_TRAILING, DRAW_SPACES_ALL
-  draw_spaces:
-    type: SourceView
-    value: DRAW_SPACES_ALL
+  # value can be one or more of the following as an array or singular
+  # DRAW_SPACES_SPACE, DRAW_SPACES_TAB, DRAW_SPACES_NEWLINE
+  # DRAW_SPACES_NBSP, DRAW_SPACES_LEADING, DRAW_SPACES_TEXT
+  # DRAW_SPACES_TRAILING, or just DRAW_SPACES_ALL
+#  draw_spaces:
+#    type: SourceView
+#    value: [DRAW_SPACES_SPACE, DRAW_SPACES_NEWLINE]
 
   # SMART_HOME_END_BEFORE, SMART_HOME_END_BEFORE, SMART_HOME_END_BEFORE
   smart_home_end:

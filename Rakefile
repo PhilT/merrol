@@ -13,12 +13,11 @@ task :install => :build do
   raise 'Unable to install gem' unless system 'gem install merrol-0.0.0.gem'
 end
 
-#TODO: How to pass args in rake
-desc 'run local app'
+desc 'run local app. Loads application.rb by default. Override with f='
 task :run do
   require_relative 'lib/merrol'
   module Merrol
-    Application.start_in WORKING_DIR, []
+    Application.start_in WORKING_DIR, [ENV['f'] || 'lib/merrol/application.rb']
     Gtk.main
   end
 end
