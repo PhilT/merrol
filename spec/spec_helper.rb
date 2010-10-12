@@ -2,5 +2,5 @@ $LOAD_PATH << 'lib'
 require 'merrol'
 include Merrol
 
-Window.new(APP_NAME, [])
+#Application.start_in WORKING_DIR, []
 
