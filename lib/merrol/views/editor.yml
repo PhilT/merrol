@@ -1,6 +1,6 @@
 layout:
   type: SourceView
-  add_to: ScrollBars
+  add_to: scroll_bars
 
 options:
   auto_indent: true

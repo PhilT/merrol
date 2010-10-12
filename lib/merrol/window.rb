@@ -9,7 +9,7 @@ module Merrol
 
 #      set_default_size(800, 600)
 #      self.icon = File.app_relative('data/merrol.svg')
-
+=begin
       signal_connect('key_press_event') do |w, e|
         keys = []
         keys << "CTRL" if e.state.control_mask?
@@ -21,7 +21,7 @@ module Merrol
         handle(shortcut)
         false
       end
-
+=end
   #    @editors = EditorController.new
   #    signal_connect('delete_event') do
   #      @buffers.modified.any? ? panel.warning :modified; true : false

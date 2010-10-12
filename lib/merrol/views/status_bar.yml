@@ -1,7 +1,7 @@
 layout:
   type: HBox
-  add_to: MainView
-  expand: true
+  add_to: main
+  expand: false
   fill: true
   padding: 1
 

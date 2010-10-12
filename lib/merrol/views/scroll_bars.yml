@@ -1,6 +1,6 @@
 layout:
   type: ScrolledWindow
-  add_to: MainView
+  add_to: main
   expand: true
   fill: true
   padding: 1
