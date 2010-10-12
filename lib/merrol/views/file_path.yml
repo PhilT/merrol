@@ -1,0 +1,6 @@
+layout:
+  type: Label
+  add_to: status_bar
+
+options:
+

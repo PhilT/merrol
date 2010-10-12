@@ -1,0 +1,9 @@
+layout:
+  type: Window
+  icon: data/merrol.svg
+  container: VBox
+
+options:
+  default_width: 800
+  default_height: 600
+
