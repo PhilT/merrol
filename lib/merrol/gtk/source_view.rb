@@ -11,11 +11,9 @@ module Gtk
     def theme= path
       name = File.basename(path)
       path = path[0..-name.length - 2]
-      puts File.app_relative(path)
       scheme = Gtk::SourceStyleSchemeManager.new.prepend_search_path(File.app_relative(path)).get_scheme(name.downcase)
       self.buffer.style_scheme = scheme
     end
-
   end
 end
 

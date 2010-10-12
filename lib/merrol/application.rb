@@ -12,12 +12,11 @@ protected
         yaml = YAML.load(File.open(File.join(File.dirname(__FILE__), "views/#{view_name}.yml")))
         widget = nil
         pack = {:add_to => nil, :expand => false, :fill => false, :padding => 0}
-        puts yaml
         yaml['layout'].merge(yaml['options'] || {}).each do |key, value|
           if key == 'type'
             widget = eval('Gtk::' + value).new
           elsif value.is_a?(Hash)
-            widget.send("#{key}=", eval("Gtk::#{value['type']}::#{value['value']}"))
+            widget.send("#{key}=", eval(['Gtk', value['type'], value['value']].compact.join('::')))
           elsif key == 'add_to'
             pack[:add_to] = @widgets[value]
           elsif %w(expand fill padding).include?(key)
@@ -26,7 +25,14 @@ protected
             widget.send("#{key}=", value)
           end
         end
-        (pack[:add_to].container || pack[:add_to]).pack_start(widget, pack[:expand], pack[:fill], pack[:padding]) if pack[:add_to]
+        if pack[:add_to]
+          container = (pack[:add_to].container || pack[:add_to])
+          if container.is_a?(Gtk::Bin)
+            container.add(widget)
+          else
+            container.pack_start(widget, pack[:expand], pack[:fill], pack[:padding])
+          end
+        end
         @widgets[view_name] = widget
       end
     end
@@ -36,14 +42,15 @@ protected
       load_commands
 
       build_widgets_from 'main', 'status_bar', 'file_path', 'scroll_bars', 'editor'
-      load_files(filepaths, view)
+      main = @widgets['main']
+      load_files(arguments, @widgets['editor'])
 
-      signal_connect('destroy') do
+      main.signal_connect('destroy') do
         save_state
         false
       end
 
-      signal_connect('key_press_event') do |w, e|
+      main.signal_connect('key_press_event') do |w, e|
         keys = []
         keys << "CTRL" if e.state.control_mask?
         keys << "ALT" if e.state.mod1_mask?
@@ -63,7 +70,7 @@ protected
     end
 
     def quit
-      destroy
+      @widgets['main'].destroy
     end
 
     def save_state

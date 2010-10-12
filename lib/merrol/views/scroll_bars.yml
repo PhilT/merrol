@@ -6,6 +6,10 @@ layout:
   padding: 1
 
 options:
-  hscrollbar_policy: POLICY_AUTOMATIC # show horizontal scrollbar: POLICY_NEVER, POLICY_AUTOMATIC, POLICY_ALWAYS
-  vscrollbar_policy: POLICY_AUTOMATIC # show vertical scrollbar: POLICY_NEVER, POLICY_AUTOMATIC, POLICY_ALWAYS
+  hscrollbar_policy:
+    type:
+    value: POLICY_AUTOMATIC # show horizontal scrollbar: POLICY_NEVER, POLICY_AUTOMATIC, POLICY_ALWAYS
+  vscrollbar_policy:
+    type:
+    value: POLICY_AUTOMATIC # show vertical scrollbar: POLICY_NEVER, POLICY_AUTOMATIC, POLICY_ALWAYS
 
