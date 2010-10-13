@@ -1,7 +1,7 @@
 module Merrol
   module CommandDispatcher
     def load_commands
-      @help = Conf.load 'commands'
+      @help = YAML.load_config 'commands'
       @commands = {}
       @help.each do |name, category|
         category.each do |command, detail|
