@@ -3,7 +3,7 @@ module Merrol
     def self.build *view_names
       widgets = {}
       view_names.each do |view_name|
-        yaml = View.load('view_name')
+        yaml = YAML.load(view_name)
         widget = nil
         add_to = nil
         pack = {:expand => false, :fill => false, :padding => 0}
@@ -34,6 +34,8 @@ module Merrol
       end
       widgets
     end
+
+  private
 
     def self.constants_from value
       type = value['type']
