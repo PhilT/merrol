@@ -8,6 +8,18 @@ module Merrol
       Application.new working_dir, arguments
     end
 
+    def complete
+      false
+    end
+
+    def quit
+      @widgets['main'].destroy
+    end
+
+    def save_state
+      Gtk.main_quit
+    end
+
 protected
     def initialize working_dir, arguments
       load_commands
@@ -28,18 +40,6 @@ protected
       name = File.basename(working_dir)
       main.title = "#{name} (#{working_dir[0..-name.length - 2]})"
       main.show_all
-    end
-
-    def complete
-      false
-    end
-
-    def quit
-      @widgets['main'].destroy
-    end
-
-    def save_state
-      Gtk.main_quit
     end
 
     def load_files filepaths, view

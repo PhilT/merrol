@@ -1,14 +1,20 @@
 require 'spec_helper'
 
-class Application
-  def save_state
-  end
-end
-
 Rspec.configure do |c|
   c.before(:all) do
-    @application = Application.start_in WORKING_DIR, []
-    process_events
+    # Stops the windows being shown which raises Gtk/Gdk errors when emitting key events and also interupts the display
+    class Gtk::Window
+      def show_all
+      end
+    end
+
+    #Cannot quit GTK as we're not starting the main loop
+    module Gtk
+      def self.main_quit
+      end
+    end
+
+    @application = Application.start_in WORKING_DIR, [] unless @application
   end
 end
 
@@ -25,8 +31,6 @@ def find_widget name
   raise "Cannot find widget: #{name}." unless widget
   widget
 end
-
-# ACTIONS
 
 # e.g. create_file 'the_file', :containing => @the_contents
 def create_file name, options
