@@ -26,7 +26,7 @@ describe Gtk::SourceView do
     mock_scheme = mock(Gtk::SourceStyleScheme)
     mock_style_manager = mock(Gtk::SourceStyleSchemeManager)
     Gtk::SourceStyleSchemeManager.stub(:new).and_return mock_style_manager
-    mock_style_manager.should_receive(:prepend_search_path).with /..\/..\/path\/to/
+    mock_style_manager.should_receive(:prepend_search_path).with /path\/to/
     mock_style_manager.should_receive(:get_scheme).with('theme').and_return mock_scheme
     mock_buffer = mock(Gtk::SourceBuffer)
     mock_buffer.should_receive(:style_scheme=).with mock_scheme
