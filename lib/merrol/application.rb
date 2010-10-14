@@ -2,6 +2,8 @@ module Merrol
   class Application
     include CommandDispatcher
 
+    attr_reader :widgets
+
     def self.start_in working_dir, arguments
       Application.new working_dir, arguments
     end

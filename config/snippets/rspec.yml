@@ -1,35 +1,35 @@
 desc: |
-  describe <class name or description> do
-    <>
+  describe ${${ClassName}|'${description}'} do
+    ${}
   end
 
 context: |
-  context <class name or description> do
-    <>
+  context ${${ClassName}|'${description}'} do
+    ${}
   end
 
 it: |
   it 'does something' do
-    <>
+    ${}
   end
 
 before: |
   before :each do
-    <>
+    ${}
   end
 
 beforea: |
   before :all do
-    <>
+    ${}
   end
 
 after: |
   before :each do
-    <>
+    ${}
   end
 
 aftera: |
   before :all do
-    <>
+    ${}
   end
 

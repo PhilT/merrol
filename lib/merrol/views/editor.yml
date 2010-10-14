@@ -12,7 +12,7 @@ options:
   indent_width: 2
   insert_spaces_instead_of_tabs: true
   right_margin_position: 120
-  show_line_marks: true
+  show_line_marks: false
   show_line_numbers: true
   show_right_margin: true
   tab_width: 2

@@ -5,7 +5,12 @@ class Application
   end
 end
 
-application = Application.start_in WORKING_DIR, []
+Rspec.configure do |c|
+  c.before(:all) do
+    @application = Application.start_in WORKING_DIR, []
+    process_events
+  end
+end
 
 # Like a single pass through Gtk.main but does not block allowing tests to finish
 def process_events
@@ -15,15 +20,10 @@ def process_events
 end
 
 # e.g. find_widget :named => 'something'
-def find_widget path
-  widget = Gtk::Window.toplevels.first
-  path.split('.').each do |name|
-    widget = widget.children.select{|child| child.name == name}.first
-    raise "Cannot find widget: #{path}" unless widget
-  end
+def find_widget name
+  widget = @application.widgets[name]
+  raise "Cannot find widget: #{name}." unless widget
   widget
-rescue name = ''
-  raise "Cannot find widget: #{path}. Failed on children of #{name}"
 end
 
 # ACTIONS
@@ -89,8 +89,8 @@ end
 
 # e.g. quits
 def quits_by_pressing key
-  application.should_receive(:quit)
-  pressing key
+  @application.should_receive(:quit)
+  pressing key, :in => find_widget('main')
   process_events
 end
 

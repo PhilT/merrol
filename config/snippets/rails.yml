@@ -2,21 +2,21 @@ bf: |
   before_filter
 
 af: |
-  after_filter :<action>, :<except|only> => [:<actions>] $0
+  after_filter :@<action>, :@<except|only> => [:@<actions>] $0
 
 bel: |
-  belongs_to :<model>
+  belongs_to :@<model>
 
 # validators
 
-va: validates_associated :<attribute>
-vc: validates_confirmation_of :<attribute>
-ve: validates_exclusion_of :<attribute>
-vf: validates_format_of :<attribute>
-vi: validates_inclusion_of :<attribute>, :<in> => <range>
-vl: validates_length_of :<attribute>, :within => <length>
-vn: validates_numericality_of :<attribute>
-vp: validates_presence_of :<attribute>
-vpif: validates_presence_of :<attribute>, :if => proc { |object| <condition> }
-vu: validates_uniqueness_of :<attribute>
+va: validates_associated :@<attribute>
+vc: validates_confirmation_of :@<attribute>
+ve: validates_exclusion_of :@<attribute>
+vf: validates_format_of :@<attribute>
+vi: validates_inclusion_of :@<attribute>, :@<in> => @<range>
+vl: validates_length_of :@<attribute>, :within => @<length>
+vn: validates_numericality_of :@<attribute>
+vp: validates_presence_of :@<attribute>
+vpif: validates_presence_of :@<attribute>, :if => proc { |object| @<condition> }
+vu: validates_uniqueness_of :@<attribute>
 

@@ -12,13 +12,13 @@ describe 'Editor' do
   end
 
   it 'loads a file from the commandline' do
-    Application.start_in '', ['the_file']
-    loads @the_contents, :into => 'view'
+    @application = Application.start_in '', ['the_file']
+    loads @the_contents, :into => 'editor'
   end
 
   it 'does not fail when no files specified on commandline' do
-    Application.start_in '', []
-    displays '', :in => 'view'
+    @application = Application.start_in '', []
+    displays '', :in => 'editor'
   end
 end
 

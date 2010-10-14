@@ -15,9 +15,5 @@ describe CommandDispatcher do
   it 'handler ignores shortcuts with no mapping' do
     handle(to_event('Control_L')).should be_false
   end
-
-  it 'lookup commands in given category' do
-    pending
-  end
 end
 
