@@ -1,6 +1,6 @@
 layout:
   type: Window
-  icon: data/merrol.svg
+  icon: data/merrol2.svg
   container: VBox
 
 options:

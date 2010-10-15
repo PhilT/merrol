@@ -1,7 +1,6 @@
 desc 'runs the specs (except integration)'
 task :spec do
   specs = (Dir['spec/*/'] - ['spec/integration/']).join(' ')
-  puts "Running specs in #{specs}"
   raise 'FAILED: Specs' unless system 'rspec -c ' + specs
 end
 
