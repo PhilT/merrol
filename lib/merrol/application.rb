@@ -16,7 +16,11 @@ protected
       main.working_dir = working_dir
 
       edit = EditController.new commands, @views
-      edit.load_all paths
+
+      file = FileController.new commands, @views
+      file.load_all paths
+      @views[:file_path].text = paths.first
+
 
       main_view.show_all
     end
