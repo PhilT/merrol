@@ -15,9 +15,6 @@ help:
     help: Opens command help panel (Subsequent presses cycle through different sort orders)
     key: F1
 
-  cancel:
-    help: Cancels (and hides if applicable) file, list, help, snippets
-
   help:
     help: Displays keyboard layout help. Cancels when CTRL key is released
     key: CTRL+F1
