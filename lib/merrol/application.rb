@@ -21,7 +21,6 @@ protected
       file.load_all paths
       @views[:file_path].text = paths.first
 
-
       main_view.show_all
     end
 
