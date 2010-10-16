@@ -7,6 +7,7 @@ describe SourceModel do
 
     model = SourceModel.new 'path'
     model.text.should == 'text'
+    model.can_undo?.should be_false
   end
 end
 
