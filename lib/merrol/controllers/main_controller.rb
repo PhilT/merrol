@@ -1,19 +1,25 @@
 module Merrol
   class MainController < Controller
-    def initialize view, working_dir, commands
-      @view = view
-      @view.signal_connect('destroy') { Gtk.main_quit}
-      commands.register('application', 'quit') {quit}
-      name = File.basename(working_dir)
-      @view.title = "#{name} (#{working_dir[0..-name.length - 2]})"
+    def initialize commands, views
+      super commands, views
+      main_view.signal_connect('destroy') { Gtk.main_quit}
     end
 
-    def complete
-      false
+    def working_dir= working_dir
+      name = File.basename(working_dir)
+      main_view.title = "#{name} (#{working_dir[0..-name.length - 2]})"
+    end
+
+    def numbers
+
     end
 
     def quit
-      @view.destroy
+      main_view.destroy
+    end
+
+    def cancel
+
     end
 
   end

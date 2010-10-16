@@ -12,8 +12,8 @@ describe WidgetBuilder do
     mock_vbox = mock Gtk::VBox
     Gtk::VBox.stub!(:new).and_return mock_vbox
 
-    widgets = WidgetBuilder.build 'view1', 'view2'
-    widgets.should == {'view1' => @mock_window, 'view2' => mock_vbox}
+    widgets = WidgetBuilder.build :view1, :view2
+    widgets.should == {:view1 => @mock_window, :view2 => mock_vbox}
   end
 
   it 'handles typed values e.g. Gtk::TextTag::WRAP_WORD' do
@@ -21,7 +21,7 @@ describe WidgetBuilder do
     YAML.stub!(:load_view).with('a_view').and_return({'layout' => {'type' => 'Window'}, 'options' => options})
     @mock_window.should_receive(:wrap_mode=).with Gtk::TextTag::WRAP_WORD
 
-    widgets = WidgetBuilder.build 'a_view'
+    widgets = WidgetBuilder.build :a_view
   end
 
   it 'packs widget with expand, fill and padding' do
@@ -33,7 +33,7 @@ describe WidgetBuilder do
     Gtk::Label.stub!(:new).and_return mock_label
     mock_vbox.should_receive(:pack_start).with(mock_label, true, true, 1)
 
-    widgets = WidgetBuilder.build 'parent', 'child'
+    widgets = WidgetBuilder.build :parent, :child
   end
 
   it 'packs widget with default options' do
@@ -45,7 +45,7 @@ describe WidgetBuilder do
     Gtk::Label.stub!(:new).and_return mock_label
     mock_vbox.should_receive(:pack_start).with(mock_label, false, false, 0)
 
-    widgets = WidgetBuilder.build 'parent', 'child'
+    widgets = WidgetBuilder.build :parent, :child
   end
 
   it 'packs a widget that has a container' do
@@ -59,7 +59,7 @@ describe WidgetBuilder do
     @mock_window.should_receive(:container).and_return mock_vbox
     mock_vbox.should_receive(:pack_start).with(mock_label, false, false, 0)
 
-    widgets = WidgetBuilder.build 'parent', 'child'
+    widgets = WidgetBuilder.build :parent, :child
   end
 
   it 'adds a widget to a single container parent (Gtk::Bin)' do
@@ -70,7 +70,7 @@ describe WidgetBuilder do
     Gtk::Label.stub!(:new).and_return mock_label
     @mock_window.should_receive(:add).with mock_label
 
-    widgets = WidgetBuilder.build 'parent', 'child'
+    widgets = WidgetBuilder.build :parent, :child
   end
 
 end

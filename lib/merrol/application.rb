@@ -7,16 +7,18 @@ module Merrol
     end
 
 protected
-    def initialize working_dir, filepaths
-      @views = WidgetBuilder.build 'main', 'status_bar', 'file_status', 'file_path', 'scroll_bars', 'editor'
-      main = @views['main']
+    def initialize working_dir, paths
+      @views = WidgetBuilder.build :main, :status_bar, :file_status, :file_path, :scroll_bars, :edit
+      main_view = @views[:main]
 
-      commands = Commands.new(main)
-      status_bar = StatusBarController.new @views['status_bar'], @views['file_status'], @views['file_path']
-      MainController.new main, working_dir, commands
-      EditorController.new @views['editor'], status_bar, filepaths, commands
+      commands = Commands.new main_view
+      main = MainController.new commands, @views
+      main.working_dir = working_dir
 
-      main.show_all
+      edit = EditController.new commands, @views
+      edit.load_all paths
+
+      main_view.show_all
     end
 
   end

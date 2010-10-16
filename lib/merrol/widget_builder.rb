@@ -3,7 +3,7 @@ module Merrol
     def self.build *view_names
       widgets = {}
       view_names.each do |view_name|
-        yaml = YAML.load_view(view_name)
+        yaml = YAML.load_view(view_name.to_s)
         widget = nil
         add_to = nil
         pack = {:expand => false, :fill => false, :padding => 0}
@@ -13,7 +13,7 @@ module Merrol
           elsif value.is_a?(Hash)
             widget.send("#{key}=", constants_from(value))
           elsif key == 'add_to'
-            add_to = widgets[value]
+            add_to = widgets[value.to_sym]
           elsif %w(expand fill padding).include?(key)
             pack[key.to_sym] = value
           else

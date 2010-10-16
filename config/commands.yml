@@ -40,7 +40,7 @@ file:
     help: Rename or move a file. Opens panel with file path. Make any adjustments and press ENTER
     key: CTRL+M
 
-  list:
+  switch:
     help: Switch between open files. Like an ALT+TAB window switcher holding down CTRL keeps the list open while pressing TAB cycles through it.
     key: CTRL+TAB
 
@@ -131,7 +131,7 @@ tools:
     help: Goto to last error
     key: CTRL+E
 
-application:
+main:
   numbers:
     help: Toggle line numbers
     key: CTRL+SHIFT+L

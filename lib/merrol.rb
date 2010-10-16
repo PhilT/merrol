@@ -1,6 +1,8 @@
 require 'gtk2'
 require 'gtksourceview2'
 require 'yaml'
+require 'active_support/inflector'
+require 'observer'
 
 APP_NAME = "Merrol"
 WORKING_DIR = Dir.getwd

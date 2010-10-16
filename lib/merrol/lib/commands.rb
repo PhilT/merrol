@@ -1,25 +1,28 @@
+
 module Merrol
   class Commands
     def initialize(window)
       @accel_group = Gtk::AccelGroup.new
       window.add_accel_group @accel_group
-      load_commands
+      load
     end
 
-    def register category, command, &block
-      @accel_group.connect "<#{APP_NAME}>/#{category}/#{command}", &block
+    def register controller
+      @commands[controller.name.to_s].each do |command, detail|
+        @accel_group.connect "<#{APP_NAME}>/#{controller.name}/#{command}" do
+          controller.send(command)
+        end
+      end
     end
 
-private
+  private
 
-    def load_commands
-      @help = YAML.load_config 'commands'
-      @commands = {}
-      @help.each do |name, category|
-        category.each do |command, detail|
-          @commands[detail['key']] = [command, detail['help']]
+    def load
+      @commands = YAML.load_config 'commands'
+      @commands.each do |category, commands|
+        commands.each do |command, detail|
           keyval, modifiers = to_keyval(detail['key'])
-          Gtk::AccelMap.add_entry("<#{APP_NAME}>/#{name}/#{command}", keyval, modifiers)
+          Gtk::AccelMap.add_entry("<#{APP_NAME}>/#{category}/#{command}", keyval, modifiers)
         end
       end
     end
@@ -33,7 +36,5 @@ private
       [keyval, state]
     end
   end
-
-
 end
 
