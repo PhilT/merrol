@@ -31,7 +31,6 @@ describe Gtk::SourceView do
     mock_buffer = mock(Gtk::SourceBuffer)
     mock_buffer.should_receive(:style_scheme=).with mock_scheme
     @view.stub!(:buffer).and_return mock_buffer
-
     @view.theme = 'path/to/theme'
   end
 end

@@ -17,6 +17,21 @@ options:
   show_right_margin: true
   tab_width: 2
 
+#TODO: Provide support for buffer preferences
+#buffer:
+#  check_brackets: true
+#  hightlight: true # may want to turn off for large files
+#  bracket_match_style:
+#    type: SourceStyle
+#    background: nil
+#    line_background: nil
+#    foreground: nil
+#    bold: false
+#    italic: false
+#    mask: false
+#    strikethrough: false
+#    underline: false
+
   # value can be one or more of the following as an array or singular
   # DRAW_SPACES_SPACE, DRAW_SPACES_TAB, DRAW_SPACES_NEWLINE
   # DRAW_SPACES_NBSP, DRAW_SPACES_LEADING, DRAW_SPACES_TEXT
