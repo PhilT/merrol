@@ -1,7 +1,7 @@
 layout:
   type: Label
   add_to: status_bar
-  padding: 4
+  padding: 2
 
 options:
   font: arial 8

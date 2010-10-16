@@ -55,8 +55,8 @@ def pressing key, options = {}
   event.state |= Gdk::Window::SHIFT_MASK if key =~ /SHIFT+/
   event.keyval = Gdk::Keyval.from_name(key.split('+').last)
   event.send_event = true
-  entry = Gdk::Keymap.default.get_entries_for_keyval(event.keyval).first
-  event.hardware_keycode = entry[0]
+  keycode, group, level = Gdk::Keymap.default.get_entries_for_keyval(event.keyval).first
+  event.hardware_keycode = keycode
   widget.signal_emit('key_press_event', event)
 end
 
