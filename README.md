@@ -4,7 +4,7 @@ Minimalist Editor for Ruby, Rails and Other Languages
 
 What
 ----------------------------------
-An editor for Ruby, Rails and supporting langauges, written in pure Ruby with an open design to allow customization and enhancement.
+An editor for Ruby, Rails and supporting langauges, written in pure Ruby using some Rails idioms with an open design to allow customization and enhancement.
 
 Why
 ----------------------------------
