@@ -13,7 +13,7 @@ module Merrol
 
     def load
       if @path && File.exist?(@path)
-        non_undoable_action { self.text = File.read(@path) }
+        begin_not_undoable_action { self.text = File.read(@path) }
       end
     end
   end
