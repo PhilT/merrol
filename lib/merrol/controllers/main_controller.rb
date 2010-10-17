@@ -19,7 +19,6 @@ module Merrol
     end
 
     def cancel
-
     end
 
   end

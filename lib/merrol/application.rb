@@ -10,15 +10,19 @@ protected
     def initialize working_dir, paths
       @views = WidgetBuilder.build :main, :status_bar, :hbox, :file_list, :scroll_bars, :edit, :file_status, :file_path
       main_view = @views[:main]
-
       commands = Commands.new main_view
-      main = MainController.new commands, @views
-      main.working_dir = working_dir
 
-      edit = EditController.new commands, @views
+      controllers = Dir[File.app_relative('lib/merrol/controllers') + '/*_controller.rb']
+      controllers.each do |controller|
+        controller = File.basename(controller, '.rb')
+        var = controller.gsub(/_controller/, '')
+        eval("@#{var} = #{controller.classify}.new commands, @views")
+      end
 
-      file = FileController.new commands, @views
-      file.load_all paths
+      @main.working_dir = working_dir
+
+
+      @file.load_all paths
       @views[:file_list].list = paths
       @views[:file_path].text = paths.last
       @views[:edit].grab_focus

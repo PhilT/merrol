@@ -1,7 +1,14 @@
 module Merrol
   class FileController < Controller
     def switch
-
+      file_list_view.show
+      id = main_view.signal_connect('key_release_event') do |widget, event|
+        keyval = Gdk::Keymap.default.lookup_key(event.hardware_keycode, 0, 0)
+        if keyval == Gdk::Keyval::GDK_Control_L
+          file_list_view.hide
+          main_view.signal_handler_disconnect(id)
+        end
+      end
     end
 
     def save

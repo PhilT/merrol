@@ -5,6 +5,7 @@ describe 'ideas' do
     it 'move past quotes or brackets when TAB pressed'
     it 'support nested quotes and brackets'
     it 'ignore TAB completion when already in TAB completion'
+    it 'complete words sometimes (when using multiple instances)'
   end
 
   it 'splits screen and switches to it when ALT+RIGHT pressed'
