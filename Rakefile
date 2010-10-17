@@ -19,11 +19,11 @@ task :install => :build do
   raise 'FAILED: Unable to install gem' unless system 'gem install merrol-0.0.0.gem'
 end
 
-desc 'run local app. Loads application.rb by default. Override with f='
+desc 'run local app. Loads application.rb by default. Override with f=file,file,file'
 task :run do
   require_relative 'lib/merrol'
   module Merrol
-    Application.start_in WORKING_DIR, [ENV['f'] || 'lib/merrol/application.rb']
+    Application.start_in WORKING_DIR, ENV['f'].split(',') || ['lib/merrol/application.rb']
     Gtk.main
   end
 end

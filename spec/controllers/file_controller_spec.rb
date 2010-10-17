@@ -50,5 +50,7 @@ describe FileController do
     file = FileController.new @mock_commands, @mock_views
     file.load_all ['path']
   end
+
+
 end
 

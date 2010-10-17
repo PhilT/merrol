@@ -28,3 +28,9 @@ There will be no dialogs. Panels will allow a more versatile and accessible way 
 
 Support multiple instances for loading different application directories
 
+Features
+----------------------------------
+* Configuration is all done in YAML files. Configure anything then CTRL+Y to reload all YAML files. Change shortcuts, settings, themes, views, etc.
+* Panels - replace the outdated dialog box. Continue working even with it open.
+* Fuzzy File Panel - Open, create and rename files quickly and easily by pattern matching and selection. Starts with a folder view to aid navigation. Supports exclusions via .gitignore and globs (configurable, obviously)
+

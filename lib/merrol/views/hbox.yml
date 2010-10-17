@@ -1,0 +1,6 @@
+layout:
+  type: HBox
+  add_to: main
+  expand: true
+  fill: true
+

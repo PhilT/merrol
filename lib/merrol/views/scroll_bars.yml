@@ -1,6 +1,6 @@
 layout:
   type: ScrolledWindow
-  add_to: main
+  add_to: hbox
   expand: true
   fill: true
   padding: 1

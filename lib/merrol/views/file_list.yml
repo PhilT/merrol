@@ -1,0 +1,11 @@
+layout:
+  type: ListView
+  add_to: hbox
+  initially_hidden: true
+
+options:
+  padding: 2
+  width_request: 300
+  border_width: 2
+  font: arial 9
+
