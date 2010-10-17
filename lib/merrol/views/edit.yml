@@ -5,7 +5,6 @@ layout:
 options:
   auto_indent: true
   theme: config/styles/Railscasts
-  language: rubyonrails
   font: monospace 9
   highlight_current_line: true
   indent_on_tab: true
@@ -19,8 +18,7 @@ options:
 
 #TODO: Provide support for buffer preferences
 #buffer:
-#  check_brackets: true
-#  hightlight: true # may want to turn off for large files
+  highlight_matching_brackets: true
 #  bracket_match_style:
 #    type: SourceStyle
 #    background: nil

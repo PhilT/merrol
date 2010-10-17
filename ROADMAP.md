@@ -1,4 +1,3 @@
-File save (CTRL+S)
 Open file in the current window with fuzzy matcher (CTRL+O)
 Autoload configuration (YAML files)
 Close file (CTRL+W)
@@ -7,7 +6,6 @@ Remove trailing space (on save)
 Save window position
 Show Keyboard shortcuts
 Single blank line at end of file (on save)
-Bracket matching
 Snippets (Smart code tab completion)
 Find/Replace (CTRL+F)
 Multi-file find/replace (CTRL+SHIFT+F)

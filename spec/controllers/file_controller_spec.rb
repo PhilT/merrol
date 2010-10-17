@@ -4,8 +4,9 @@ describe FileController do
   before(:each) do
     @mock_commands = mock Commands, :register => nil
     @mock_image = mock Gtk::Image
-    @mock_views = {:edit => mock(Gtk::SourceView), :file_status => @mock_image}
-    @mock_source_model = mock SourceModel
+    @mock_theme = mock Gtk::SourceStyleScheme
+    @mock_views = {:edit => mock(Gtk::SourceView, :theme => @mock_theme, :highlight_brackets => true), :file_status => @mock_image}
+    @mock_source_model = mock SourceModel, :style_scheme= => nil, :highlight_matching_brackets= => nil
     SourceModel.stub!(:new).and_return @mock_source_model
     @mock_views[:edit].stub!(:buffer=)
     @mock_source_model.stub!(:modified=)
@@ -17,6 +18,8 @@ describe FileController do
     SourceModel.should_receive(:new).with('path2').and_return @mock_source_model
     @mock_views[:edit].should_receive(:buffer=).once.with @mock_source_model
     @mock_source_model.should_receive(:modified=).with false
+    @mock_source_model.should_receive(:style_scheme=).with @mock_theme
+    @mock_source_model.should_receive(:highlight_matching_brackets=).with true
 
     file = FileController.new @mock_commands, @mock_views
     file.load_all ['path1', 'path2']
