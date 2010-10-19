@@ -1,4 +1,3 @@
-
 module Merrol
   class Commands
     def initialize(window)

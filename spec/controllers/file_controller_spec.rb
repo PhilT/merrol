@@ -3,9 +3,16 @@ require 'spec_helper'
 describe FileController do
   before(:each) do
     @mock_commands = mock Commands, :register => nil
+    @mock_main = mock Gtk::Window
     @mock_image = mock Gtk::Image
+    @mock_list = mock Gtk::ListView
     @mock_theme = mock Gtk::SourceStyleScheme
-    @mock_views = {:edit => mock(Gtk::SourceView, :theme => @mock_theme, :highlight_brackets => true), :file_status => @mock_image}
+    @mock_views = {
+      :main => @mock_main,
+      :edit => mock(Gtk::SourceView, :theme => @mock_theme, :highlight_brackets => true),
+      :file_status => @mock_image,
+      :file_list => @mock_list
+    }
     @mock_source_model = mock SourceModel, :style_scheme= => nil, :highlight_matching_brackets= => nil
     SourceModel.stub!(:new).and_return @mock_source_model
     @mock_views[:edit].stub!(:buffer=)
@@ -51,6 +58,26 @@ describe FileController do
     file.load_all ['path']
   end
 
+  describe 'switch' do
 
+    it 'displays file_list when shortcut pressed' do
+      @mock_list.should_receive :show
+      @mock_main.stub! :signal_connect
+      file = FileController.new @mock_commands, @mock_views
+      file.switch
+    end
+
+    it 'releasing modifier hides file_list' do
+      @mock_list.stub! :show
+      @mock_list.should_receive :hide
+      event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
+      event.keyval = Gdk::Keyval::GDK_Control_L
+
+      @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, event)
+      @mock_main.should_receive(:signal_handler_disconnect) # TODO: Need to check correct id passed but can't figure out how to do this with rspec
+      file = FileController.new @mock_commands, @mock_views
+      file.switch
+    end
+  end
 end
 
