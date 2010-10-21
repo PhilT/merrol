@@ -2,10 +2,10 @@ module Merrol
   class FileController < Controller
     def switch
       file_list_view.show
-      id = main_view.signal_connect('key_release_event') do |widget, event|
+      self.handler_id = main_view.signal_connect('key_release_event') do |widget, event|
         if event.keyval == Gdk::Keyval::GDK_Control_L
           file_list_view.hide
-          main_view.signal_handler_disconnect(id)
+          main_view.signal_handler_disconnect(handler_id)
         end
       end
     end
@@ -36,6 +36,10 @@ module Merrol
         load path
       end
     end
+
+  private
+    attr_accessor :handler_id
+
   end
 end
 

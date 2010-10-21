@@ -59,11 +59,11 @@ describe FileController do
   end
 
   describe 'switch' do
-
     it 'displays file_list when shortcut pressed' do
       @mock_list.should_receive :show
       @mock_main.stub! :signal_connect
       file = FileController.new @mock_commands, @mock_views
+      file.stub!(:id=)
       file.switch
     end
 
@@ -73,9 +73,32 @@ describe FileController do
       event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
       event.keyval = Gdk::Keyval::GDK_Control_L
 
-      @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, event)
-      @mock_main.should_receive(:signal_handler_disconnect) # TODO: Need to check correct id passed but can't figure out how to do this with rspec
+      @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, event).and_return 1
+      @mock_main.should_receive(:signal_handler_disconnect).with 1
       file = FileController.new @mock_commands, @mock_views
+      file.should_receive(:handler_id=).with(1)
+      file.should_receive(:handler_id).and_return 1
+      file.switch
+    end
+
+    it 'handler_id from key release event used to disconnect handler' do
+      @mock_list.stub :show
+      @mock_main.should_receive(:signal_connect).and_return(1)
+      file = FileController.new @mock_commands, @mock_views
+      file.switch
+      file.send(:handler_id).should == 1
+    end
+
+    it 'ensure handler_id is called when disconnecting' do
+      @mock_list.stub! :show
+      @mock_list.should_receive :hide
+      event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
+      event.keyval = Gdk::Keyval::GDK_Control_L
+
+      @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, event)
+      @mock_main.should_receive(:signal_handler_disconnect).with 1
+      file = FileController.new @mock_commands, @mock_views
+      file.send(:handler_id=, 1)
       file.switch
     end
   end
