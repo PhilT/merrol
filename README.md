@@ -4,11 +4,11 @@ Minimalist Editor for Ruby, Rails and Other Languages
 
 What
 ----------------------------------
-An editor for Ruby, Rails and supporting langauges, written in pure Ruby using some Rails idioms with an open design to allow customization and enhancement.
+An editor for Ruby, Rails and supporting langauges, written in pure Ruby (1.9) and GTK using some Rails idioms with an open design to allow customization and enhancement.
 
 Why
 ----------------------------------
-I noticed, while using other editors that I found myself constantly re-arranging windows to get the optimum setup. I was also frustrated by little bugs and design issues. I thought, there must be a better way.
+I noticed, while using other editors that I found myself constantly re-arranging windows to get the optimum setup. I was also frustrated by little bugs, design issues and sensible shortcuts. I thought, there must be a better way.
 
 I want to make an editor that is really easy to tweak. Users would be able to fork it and customize it as they saw fit. It will also make use of existing apps such as autotest and rails generators and commands such as grep.
 
@@ -28,9 +28,18 @@ There will be no dialogs. Panels will allow a more versatile and accessible way 
 
 Support multiple instances for loading different application directories
 
+It will be developed primarily for the Linux OS in particular it uses ruby GNOME 2. However, this is a cross platform library so it should work on Windows and Mac OS.
+
+What this is not
+----------------------------------
+It will not be a full blown IDE. There are plenty of these about and I don't believe they are necessary for Ruby or Rails development.
+
+It will not support TextMate bundles.
+
 Features
 ----------------------------------
 * Configuration is all done in YAML files. Configure anything then CTRL+Y to reload all YAML files. Change shortcuts, settings, themes, views, etc.
 * Panels - replace the outdated dialog box. Continue working even with it open.
 * Fuzzy File Panel - Open, create and rename files quickly and easily by pattern matching and selection. Starts with a folder view to aid navigation. Supports exclusions via .gitignore and globs (configurable, obviously)
+* Written with pure Ruby version 1.9.2 and Ruby-GNOME2
 

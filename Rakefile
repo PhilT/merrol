@@ -40,3 +40,12 @@ task :coverage do
   Rake::Task['spec'].invoke
 end
 
+desc 'takes the version in the gemspec creates a git tag and sends the gem to rubygems'
+task :release do
+  gemspec = File.read('merrol.gemspec')
+  name = gemspec.scan(/s\.name.*=.*"(.*)"/).first.first
+  version = gemspec.scan(/s\.version.*=.*"(.*)"/).first.first
+  system "git tag -a v#{version} -m 'Version #{version}'"
+  system "gem push #{name}-#{version}.gem"
+end
+
