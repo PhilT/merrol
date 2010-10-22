@@ -12,7 +12,8 @@ module Merrol
     def method_missing(meth, *args, &block)
       method = meth.to_s
       if method =~ /_view$/
-        @views[method.gsub(/_view$/, '').to_sym]
+        view = @views[method.gsub(/_view$/, '').to_sym]
+        view || super
       else
         super
       end

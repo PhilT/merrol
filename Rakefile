@@ -1,7 +1,8 @@
 desc 'runs the specs (except integration)'
 task :spec do
   specs = (Dir['spec/*/'] - ['spec/integration/']).join(' ')
-  raise 'FAILED: Specs' unless system 'rspec -c ' + specs
+  coverage = 'export COVERAGE=true && ' if ENV['COVERAGE']
+  raise 'FAILED: Specs' unless system "#{coverage}rspec #{specs}"
 end
 
 desc 'runs integration specs'
@@ -31,5 +32,11 @@ end
 desc 'tests, builds, installs and runs the app'
 task :default => [:spec, :integration, :build, :install] do
   system 'm'
+end
+
+desc 'code coverage'
+task :coverage do
+  ENV['COVERAGE'] = 'true'
+  Rake::Task['spec'].invoke
 end
 

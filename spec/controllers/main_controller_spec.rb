@@ -8,5 +8,13 @@ describe MainController do
     main = MainController.new mock_commands, {:main => mock_view}
     main.working_dir = 'working/dir/project'
   end
+
+  it 'quit destroys window' do
+    mock_commands = mock Commands, :register => nil
+    mock_view = mock Gtk::Window, :signal_connect => nil
+    mock_view.should_receive :destroy
+    main = MainController.new mock_commands, {:main => mock_view}
+    main.quit
+  end
 end
 
