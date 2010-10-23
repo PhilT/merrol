@@ -5,7 +5,7 @@ layout:
 
 options:
   padding: 2
-  width_request: 300
+  width_request: 250
   border_width: 2
   font: arial 9
 

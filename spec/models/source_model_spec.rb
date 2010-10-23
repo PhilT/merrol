@@ -50,7 +50,7 @@ describe SourceModel do
     end
 
     it 'does not set based on bang line that accidentally matches' do
-      File.stub!(:read).with('path').and_return "puts 'I love ruby'"
+      File.stub!(:read).with('path').and_return "# I love ruby"
       model = SourceModel.new 'some_script'
       model.language.should be_nil
     end

@@ -4,6 +4,6 @@ layout:
   container: VBox
 
 options:
-  default_width: 800
-  default_height: 600
+  default_position: 0, 0
+  default_size: 1150, 800
 

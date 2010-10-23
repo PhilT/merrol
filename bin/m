@@ -3,7 +3,7 @@
 require 'merrol'
 
 module Merrol
-  Application.start_in WORKING_DIR, ARGV
+  Application.new WORKING_DIR, ARGV
   Gtk.main
 end
 
