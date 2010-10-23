@@ -94,18 +94,30 @@ describe FileController do
       end
     end
 
+    context 'when releasing TAB' do
+      it 'does nothing' do
+        @event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
+        @event.keyval = Gdk::Keyval::GDK_Tab
+        file = FileController.new @mock_commands, @mock_views
+        @mock_main.stub(:signal_connect).and_yield nil, @event
+        @mock_list.should_not_receive :hide
+        @mock_main.should_not_receive :signal_handler_disconnect
+        file.switch
+      end
+    end
+
     context 'when releasing modifier' do
       before(:each) do
         @mock_edit.stub(:scroll_to_cursor)
-        @ctrl_l_event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
-        @ctrl_l_event.keyval = Gdk::Keyval::GDK_Control_L
+        @event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
+        @event.keyval = Gdk::Keyval::GDK_Control_L
         @mock_list.stub :hide
-        @mock_main.stub(:signal_handler_disconnect)
+        @mock_main.stub :signal_handler_disconnect
       end
 
       it 'moves selected file to the top of the list' do
         file = FileController.new @mock_commands, @mock_views
-        @mock_main.stub(:signal_connect).and_yield nil, @ctrl_l_event
+        @mock_main.stub(:signal_connect).and_yield nil, @event
         @mock_list.should_receive :selected_to_top
         file.switch
       end
@@ -113,7 +125,7 @@ describe FileController do
       it 'hides file_list' do
         @mock_list.should_receive :hide
 
-        @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, @ctrl_l_event).and_return 1
+        @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, @event).and_return 1
         file = FileController.new @mock_commands, @mock_views
         file.should_receive(:handler_id=).with(1)
         file.should_receive(:handler_id).and_return 1
@@ -128,7 +140,7 @@ describe FileController do
       end
 
       it 'disconnect handler is called with the correct handler id' do
-        @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, @ctrl_l_event)
+        @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, @event)
         @mock_main.should_receive(:signal_handler_disconnect).with 1
         file = FileController.new @mock_commands, @mock_views
         file.send(:handler_id=, 1)
