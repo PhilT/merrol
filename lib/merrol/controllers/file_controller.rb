@@ -8,6 +8,7 @@ module Merrol
         if event.keyval == Gdk::Keyval::GDK_Control_L
           file_list_view.hide
           main_view.signal_handler_disconnect(handler_id)
+          edit_view.scroll_to_cursor
         end
       end
     end

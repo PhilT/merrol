@@ -4,7 +4,7 @@ Minimalist Editor for Ruby, Rails and Other Languages
 
 Status
 ----------------------------------
-Under development (October 2010)
+**Under development (October 2010)**
 
 The first milestone (0.0.1) will soon be released. This will have syntax highlighting, load mulitple files (from command line), save (CTRL+S) and switch files (CTRL+TAB). It should be stable but there isn't much to it yet.
 
@@ -21,7 +21,7 @@ I want to make an editor that is really easy to tweak. Users would be able to fo
 
 I want to challenge the conventional editor design and take a different approach to editing. One that doesn't involve a mouse but one that can be learnt quickly.
 
-Design Goals
+Goals
 ----------------------------------
 To get the most out of a screen whether it's a 30" desktop or a 13" laptop. Control screens without having to resize windows. Maximize the workspace.
 
@@ -38,7 +38,7 @@ Support multiple instances for loading different application directories
 It will be developed primarily for the Linux OS in particular it uses ruby GNOME 2. However, this is a cross platform library so it should work on Windows and Mac OS.
 
 
-What this is not
+!What
 ----------------------------------
 It will not be a full blown IDE. There are plenty of these about and I don't believe they are necessary for Ruby or Rails development.
 

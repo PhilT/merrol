@@ -95,6 +95,10 @@ describe FileController do
     end
 
     context 'when releasing modifier' do
+      before(:each) do
+        @mock_edit.stub(:scroll_to_cursor)
+      end
+
       it 'hides file_list' do
         @mock_list.should_receive :hide
         event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)

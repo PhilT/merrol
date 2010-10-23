@@ -13,6 +13,10 @@ module Gtk
     def highlight_matching_brackets= on
       @highlight_brackets = on
     end
+
+    def scroll_to_cursor
+      scroll_mark_onscreen buffer.selection_bound
+    end
   end
 end
 
