@@ -12,7 +12,7 @@ module Merrol
       self.handler_id = main_view.signal_connect('key_release_event') do |widget, event|
         if event.keyval == Gdk::Keyval::GDK_Control_L
           file_list_view.hide
-          main_view.signal_handler_disconnect(handler_id)
+          #main_view.signal_handler_disconnect(handler_id)
           edit_view.scroll_to_cursor
           file_list_view.selected_to_top
           true
