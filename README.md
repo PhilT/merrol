@@ -25,7 +25,7 @@ Design Goals
 ----------------------------------
 To get the most out of a screen whether it's a 30" desktop or a 13" laptop. Control screens without having to resize windows. Maximize the workspace.
 
-Foremost it will be a Rails and Ruby editor. There will be nothing stopping it being customized for other languages and there will be nothing to stop it being forked or plugins added.
+Foremost, it will be a Rails and Ruby editor with an emphasis on Behaviour and Test Driven Development. There will be nothing stopping it being customized for other languages and there will be nothing to stop it being forked or plugins added.
 
 No toolbars, menus, icons or any other extra fluff. Straightforward shortcuts will allow access to all functions.
 
@@ -36,6 +36,7 @@ There will be no dialogs. Panels will allow a more versatile and accessible way 
 Support multiple instances for loading different application directories
 
 It will be developed primarily for the Linux OS in particular it uses ruby GNOME 2. However, this is a cross platform library so it should work on Windows and Mac OS.
+
 
 What this is not
 ----------------------------------
@@ -50,3 +51,4 @@ Features
 * Fuzzy File Panel - Open, create and rename files quickly and easily by pattern matching and selection. Starts with a folder view to aid navigation. Supports exclusions via .gitignore and globs (configurable, obviously)
 * Written with pure Ruby version 1.9.2 and Ruby-GNOME2
 * Fast startup time
+
