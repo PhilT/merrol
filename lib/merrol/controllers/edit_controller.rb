@@ -1,9 +1,5 @@
 module Merrol
   class EditController < Controller
-    def switch buffer
-      edit_view.buffer = buffer
-    end
-
     def select_all
       edit_view.select_all(true)
     end
@@ -18,6 +14,10 @@ module Merrol
 
     def redo
       edit_view.redo
+    end
+
+    def delete
+      edit_view.buffer.delete_selection true, true
     end
   end
 end

@@ -24,7 +24,7 @@ desc 'run local app. Loads application.rb by default. Override with f=file,file,
 task :run do
   require_relative 'lib/merrol'
   module Merrol
-    Application.start_in WORKING_DIR, ENV['f'].split(',') || ['lib/merrol/application.rb']
+    Application.start_in WORKING_DIR, (ENV['f'] && ENV['f'].split(',')) || %w(lib/merrol/application.rb README.md)
     Gtk.main
   end
 end

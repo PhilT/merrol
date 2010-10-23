@@ -12,21 +12,17 @@ module Gtk
         iter = self.model.append
         self.model.set_value(iter, 0, item)
       end
-    end
-
-    def prepend item
-    end
-
-    def append item
-
-    end
-
-    def remove item
-
+      selection.select_iter(self.model.iter_first) if items.any?
     end
 
     def selected
+      selection.selected[0] if selection.selected
+    end
 
+    def next
+      iter = selection.selected
+      iter.next!
+      selection.select_iter iter
     end
   end
 end

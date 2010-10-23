@@ -1,6 +1,5 @@
 module Merrol
   class Controller
-    include Observable
 
     def initialize commands, views
       @commands = commands

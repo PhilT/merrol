@@ -2,6 +2,13 @@ Merrol
 ======
 Minimalist Editor for Ruby, Rails and Other Languages
 
+Status
+----------------------------------
+Under development (October 2010)
+
+The first milestone (0.0.1) will soon be released. This will have syntax highlighting, load mulitple files (from command line), save (CTRL+S) and switch files (CTRL+TAB). It should be stable but there isn't much to it yet.
+
+
 What
 ----------------------------------
 An editor for Ruby, Rails and supporting langauges, written in pure Ruby (1.9) and GTK using some Rails idioms with an open design to allow customization and enhancement.
@@ -42,4 +49,4 @@ Features
 * Panels - replace the outdated dialog box. Continue working even with it open.
 * Fuzzy File Panel - Open, create and rename files quickly and easily by pattern matching and selection. Starts with a folder view to aid navigation. Supports exclusions via .gitignore and globs (configurable, obviously)
 * Written with pure Ruby version 1.9.2 and Ruby-GNOME2
-
+* Fast startup time

@@ -13,36 +13,64 @@ describe Gtk::ListView do
     @list_view.columns.size.should == 1
   end
 
-  it 'sets a list of strings' do
-    mock_tree_iter = mock Gtk::TreeIter
-    mock_list_store = mock Gtk::ListStore
-    @list_view.stub!(:model=)
-    @list_view.stub!(:model).and_return mock_list_store
-    Gtk::ListStore.stub!(:new).and_return mock_list_store
-    mock_list_store.should_receive(:append).twice.and_return mock_tree_iter
-    mock_list_store.should_receive(:set_value).with(mock_tree_iter, 0, 'Item 1')
-    mock_list_store.should_receive(:set_value).with(mock_tree_iter, 0, 'Item 2')
-    @list_view.list = ['Item 1', 'Item 2']
+  describe '#list=' do
+    before(:each) do
+      @mock_iter = mock Gtk::TreeIter
+      @mock_list_store = mock Gtk::ListStore, :append => nil, :set_value => nil
+      @list_view.stub!(:model=)
+      @list_view.stub!(:model).and_return @mock_list_store
+      @mock_list_store.stub(:iter_first).and_return @mock_iter
+      Gtk::ListStore.stub!(:new).and_return @mock_list_store
+      @mock_selection = mock Gtk::TreeSelection, :select_iter => nil
+      @list_view.stub(:selection).and_return @mock_selection
+    end
+
+    it 'insert a number of rows' do
+      @mock_list_store.should_receive(:append).twice.and_return @mock_iter
+      @mock_list_store.should_receive(:set_value).with(@mock_iter, 0, 'Item 1')
+      @mock_list_store.should_receive(:set_value).with(@mock_iter, 0, 'Item 2')
+      @list_view.list = ['Item 1', 'Item 2']
+    end
+
+    it 'selects first row' do
+      @mock_selection.should_receive(:select_iter).with @mock_iter
+      @list_view.list = ['Item 1']
+    end
+
+    it 'does not select first row if none set' do
+      @list_view.should_not_receive(:selection)
+      @list_view.list = []
+    end
   end
 
-  it 'can add a string' do
-
+  describe '#next' do
+    it 'selects the next row' do
+      mock_iter = mock Gtk::TreeIter
+      mock_selection = mock Gtk::TreeSelection, :selected => mock_iter
+      mock_iter.should_receive :next!
+      mock_selection.should_receive(:select_iter).with mock_iter
+      @list_view.stub(:selection).and_return mock_selection
+      @list_view.next
+    end
   end
 
-  it 'can remove a string' do
+  describe '#selected' do
+    before(:each) do
+      @mock_iter = mock Gtk::TreeIter
+      @mock_selection = mock Gtk::TreeSelection, :selected => nil
+    end
 
-  end
+    it 'retrieves the text of the selected row' do
+      @mock_selection.stub(:selected).and_return @mock_iter
+      @mock_iter.stub(:[]).with(0).and_return 'selected row'
+      @list_view.stub(:selection).and_return @mock_selection
+      @list_view.selected.should == 'selected row'
+    end
 
-  it 'selects a specified string' do
-
-  end
-
-  it 'selects the next string in the list' do
-
-  end
-
-  it 'selects the previous string in the list' do
-
+    it 'does not fail when nothing selected' do
+      @list_view.stub(:selection).and_return @mock_selection
+      @list_view.selected.should be_nil
+    end
   end
 end
 

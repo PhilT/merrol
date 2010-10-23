@@ -17,14 +17,22 @@ describe EditController do
     @edit.select_none
   end
 
-  it 'undoes the last character(s) entered' do
+  it 'calls redo on view' do
     @mock_view.should_receive(:redo)
     @edit.redo
   end
 
-  it 'redoes enters the last characters that were undone' do
+  it 'calls undo on view' do
     @mock_view.should_receive(:undo)
     @edit.undo
   end
+
+  it 'calls delete on view' do
+    @mock_buffer = mock SourceModel
+    @mock_view.stub(:buffer).and_return @mock_buffer
+    @mock_buffer.should_receive(:delete_selection).with(true, true)
+    @edit.delete
+  end
+
 end
 
