@@ -25,15 +25,15 @@ Goals
 ----------------------------------
 To get the most out of a screen whether it's a 30" desktop or a 13" laptop. Control screens without having to resize windows. Maximize the workspace.
 
-Foremost, it will be a Rails and Ruby editor with an emphasis on Behaviour and Test Driven Development. There will be nothing stopping it being customized for other languages and there will be nothing to stop it being forked or plugins added.
+Foremost, it will be a Rails and Ruby editor with an emphasis on Behaviour and Test Driven Development. There will be nothing stopping it being customized for other languages and there will be nothing to stop it being forked or plugins added, although a plugin system is not currently planned.
 
 No toolbars, menus, icons or any other extra fluff. Straightforward shortcuts will allow access to all functions.
 
-It will be robust, built with well factored, well tested, accessible pure Ruby code
+It will be robust, built with well factored, well tested, pure Ruby code
 
 There will be no dialogs. Panels will allow a more versatile and accessible way to accept input.
 
-Support multiple instances for loading different application directories
+Support multiple instances for loading different application directories.
 
 It will be developed primarily for the Linux OS in particular it uses ruby GNOME 2. However, this is a cross platform library so it should work on Windows and Mac OS.
 
@@ -46,7 +46,7 @@ It will not support TextMate bundles.
 
 Features
 ----------------------------------
-* Configuration is all done in YAML files. Configure anything then CTRL+Y to reload all YAML files. Change shortcuts, settings, themes, views, etc.
+* Configuration is all done in YAML files. Configure anything then CTRL+Y to reload all YAML files. Change shortcuts, settings, themes, views, snippets, etc.
 * Panels - replace the outdated dialog box. Continue working even with it open.
 * Fuzzy File Panel - Open, create and rename files quickly and easily by pattern matching and selection. Starts with a folder view to aid navigation. Supports exclusions via .gitignore and globs (configurable, obviously)
 * Written with pure Ruby version 1.9.2 and Ruby-GNOME2

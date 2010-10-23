@@ -14,7 +14,7 @@ Rspec.configure do |c|
       end
     end
 
-    @application = Application.start_in WORKING_DIR, [] unless @application
+    @application = Application.new WORKING_DIR, [] unless @application
   end
 end
 
