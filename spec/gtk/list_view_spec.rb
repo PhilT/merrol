@@ -3,6 +3,11 @@ require 'spec_helper'
 describe Gtk::ListView do
   before(:each) do
     @list_view = Gtk::ListView.new
+    @mock_iter = mock Gtk::TreeIter
+    @mock_selection = mock Gtk::TreeSelection, :selected => nil, :select_iter => nil
+    @list_view.stub(:selection).and_return @mock_selection
+    @mock_list_store = mock Gtk::ListStore, :append => nil, :set_value => nil
+    @mock_list_store.stub(:iter_first).and_return @mock_iter
   end
 
   it 'headers are not visible' do
@@ -15,14 +20,9 @@ describe Gtk::ListView do
 
   describe '#list=' do
     before(:each) do
-      @mock_iter = mock Gtk::TreeIter
-      @mock_list_store = mock Gtk::ListStore, :append => nil, :set_value => nil
       @list_view.stub!(:model=)
       @list_view.stub!(:model).and_return @mock_list_store
-      @mock_list_store.stub(:iter_first).and_return @mock_iter
       Gtk::ListStore.stub!(:new).and_return @mock_list_store
-      @mock_selection = mock Gtk::TreeSelection, :select_iter => nil
-      @list_view.stub(:selection).and_return @mock_selection
     end
 
     it 'insert a number of rows' do
@@ -45,10 +45,9 @@ describe Gtk::ListView do
 
   describe '#next' do
     it 'selects the next row' do
-      mock_iter = mock Gtk::TreeIter
-      mock_selection = mock Gtk::TreeSelection, :selected => mock_iter
-      mock_iter.should_receive :next!
-      mock_selection.should_receive(:select_iter).with mock_iter
+      mock_selection = mock Gtk::TreeSelection, :selected => @mock_iter
+      @mock_iter.should_receive :next!
+      mock_selection.should_receive(:select_iter).with @mock_iter
       @list_view.stub(:selection).and_return mock_selection
       @list_view.next
     end
@@ -56,20 +55,29 @@ describe Gtk::ListView do
 
   describe '#selected' do
     before(:each) do
-      @mock_iter = mock Gtk::TreeIter
-      @mock_selection = mock Gtk::TreeSelection, :selected => nil
     end
 
     it 'retrieves the text of the selected row' do
+      @list_view.stub(:selection).and_return @mock_selection
       @mock_selection.stub(:selected).and_return @mock_iter
       @mock_iter.stub(:[]).with(0).and_return 'selected row'
-      @list_view.stub(:selection).and_return @mock_selection
       @list_view.selected.should == 'selected row'
     end
 
     it 'does not fail when nothing selected' do
       @list_view.stub(:selection).and_return @mock_selection
       @list_view.selected.should be_nil
+    end
+  end
+
+  describe '#selected_to_top' do
+    it 'moves the selected row to the top of the list' do
+      @list_view.stub(:selection).and_return @mock_selection
+      selected_mock_iter = mock Gtk::TreeIter
+      @mock_selection.stub(:selected).and_return selected_mock_iter
+      @list_view.stub(:model).and_return @mock_list_store
+      @mock_list_store.should_receive(:move_before).with(selected_mock_iter, @mock_iter)
+      @list_view.selected_to_top
     end
   end
 end

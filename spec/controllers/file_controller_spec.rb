@@ -5,7 +5,7 @@ describe FileController do
     @mock_commands = mock Commands, :register => nil
     @mock_main = mock Gtk::Window
     @mock_image = mock Gtk::Image
-    @mock_list = mock Gtk::ListView
+    @mock_list = mock Gtk::ListView, :selected_to_top => nil
     @mock_theme = mock Gtk::SourceStyleScheme
     @mock_edit = mock(Gtk::SourceView, :theme => @mock_theme, :highlight_brackets => true)
     @mock_views = {
@@ -52,7 +52,7 @@ describe FileController do
     file.load_all ['path']
   end
 
-  it 'indicate when source model has been saved' do
+  it 'indicate when source model is not modified' do
     @mock_source_model.stub(:modified?).and_return false
     @mock_source_model.should_receive(:signal_connect).with('modified_changed').and_yield
     @mock_image.should_receive(:file=).with /saved.svg/
@@ -97,40 +97,41 @@ describe FileController do
     context 'when releasing modifier' do
       before(:each) do
         @mock_edit.stub(:scroll_to_cursor)
+        @ctrl_l_event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
+        @ctrl_l_event.keyval = Gdk::Keyval::GDK_Control_L
+        @mock_list.stub :hide
+        @mock_main.stub(:signal_handler_disconnect)
+      end
+
+      it 'moves selected file to the top of the list' do
+        file = FileController.new @mock_commands, @mock_views
+        @mock_main.stub(:signal_connect).and_yield nil, @ctrl_l_event
+        @mock_list.should_receive :selected_to_top
+        file.switch
       end
 
       it 'hides file_list' do
         @mock_list.should_receive :hide
-        event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
-        event.keyval = Gdk::Keyval::GDK_Control_L
 
-        @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, event).and_return 1
-        @mock_main.should_receive(:signal_handler_disconnect).with 1
+        @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, @ctrl_l_event).and_return 1
         file = FileController.new @mock_commands, @mock_views
         file.should_receive(:handler_id=).with(1)
         file.should_receive(:handler_id).and_return 1
-        file.load_all []
         file.switch
       end
 
       it 'handler_id from key release event is used to disconnect handler' do
         @mock_main.should_receive(:signal_connect).with('key_release_event').and_return(1)
         file = FileController.new @mock_commands, @mock_views
-        file.load_all []
         file.switch
         file.send(:handler_id).should == 1
       end
 
       it 'disconnect handler is called with the correct handler id' do
-        @mock_list.should_receive :hide
-        event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
-        event.keyval = Gdk::Keyval::GDK_Control_L
-
-        @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, event)
+        @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, @ctrl_l_event)
         @mock_main.should_receive(:signal_handler_disconnect).with 1
         file = FileController.new @mock_commands, @mock_views
         file.send(:handler_id=, 1)
-        file.load_all []
         file.switch
       end
     end

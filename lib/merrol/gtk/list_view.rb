@@ -24,6 +24,10 @@ module Gtk
       iter.next!
       selection.select_iter iter
     end
+
+    def selected_to_top
+      self.model.move_before selection.selected, self.model.iter_first
+    end
   end
 end
 

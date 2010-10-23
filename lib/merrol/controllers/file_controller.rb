@@ -1,5 +1,10 @@
 module Merrol
   class FileController < Controller
+    def initialize commands, views
+      super commands, views
+      @source_models = {}
+    end
+
     def switch
       file_list_view.show
       file_list_view.next
@@ -9,6 +14,10 @@ module Merrol
           file_list_view.hide
           main_view.signal_handler_disconnect(handler_id)
           edit_view.scroll_to_cursor
+          file_list_view.selected_to_top
+          true
+        else
+          false
         end
       end
     end
@@ -34,7 +43,6 @@ module Merrol
     end
 
     def load_all paths
-      @source_models = {}
       paths.each do |path|
         load path
       end
