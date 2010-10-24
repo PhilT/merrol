@@ -2,19 +2,15 @@ require 'spec_helper'
 
 Rspec.configure do |c|
   c.before(:all) do
-    # Stops the windows being shown which raises Gtk/Gdk errors when emitting key events and also interupts the display
-    class Gtk::Window
-      def show_all
-      end
-    end
-
-    #Cannot quit GTK as we're not starting the main loop
     module Gtk
       def self.main_quit
       end
     end
 
-    @application = Application.new WORKING_DIR, [] unless @application
+    unless $application
+      puts 'Starting new app...'
+      $application = Application.new WORKING_DIR, ['README.md']
+    end
   end
 end
 
@@ -25,9 +21,13 @@ def process_events
   end
 end
 
+def show_ui
+  Gtk.main
+end
+
 # e.g. find_widget :named => 'something'
-def find_widget name
-  widget = @application.widgets[name]
+def find_widget name, application = nil
+  widget = (application || $application).views[name]
   raise "Cannot find widget: #{name}." unless widget
   widget
 end
@@ -50,10 +50,8 @@ def pressing key, options = {}
 
   event = Shortcut.to_event(key)
 # TODO: Remove if not needed once running integration tests again
-#  event.window = widget
-#  event.send_event = true
-#  keycode, group, level = Gdk::Keymap.default.get_entries_for_keyval(event.keyval).first
-#  event.hardware_keycode = keycode
+  keycode, group, level = Gdk::Keymap.default.get_entries_for_keyval(event.keyval).first
+  event.hardware_keycode = keycode
   widget.signal_emit('key_press_event', event)
 end
 
@@ -73,14 +71,14 @@ end
 
 # e.g. displays 'the_file', :in => 'open.results'
 def displays text, options = {}
-  widget = find_widget(options[:in])
+  widget = find_widget(options[:in] || options[:into], options[:test_against])
   buffer = widget.is_a?(Gtk::TextView) ? widget.buffer : widget
   buffer.text.should == text
 end
 
 # e.g. loads :into => 'editor'
 def loads contents, options = {}
-  displays contents, :in => options[:into]
+  displays contents, options
 end
 
 # e.g. saves the_contents, :in => 'the_file'
@@ -90,8 +88,8 @@ end
 
 # e.g. quits
 def quits_by_pressing key
-  @application.should_receive(:quit)
-  pressing key, :in => find_widget('main')
+  $application.controllers['main'].should_receive(:quit)
+  pressing key, :in => find_widget(:main)
   process_events
 end
 

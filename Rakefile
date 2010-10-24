@@ -17,7 +17,8 @@ end
 
 desc 'builds and installs the gem'
 task :install => :build do
-  raise 'FAILED: Unable to install gem' unless system 'gem install merrol-0.0.0.gem'
+  system "gem uninstall -x merrol"
+  raise 'FAILED: Unable to install gem' unless system "gem install #{gem_name}"
 end
 
 desc 'run local app. Loads application.rb by default. Override with f=file,file,file'
@@ -43,10 +44,20 @@ end
 
 desc 'takes the version in the gemspec creates a git tag and sends the gem to rubygems'
 task :release do
+  name, version = gemspec_details
+  system "git tag -a v#{version} -m 'Version #{version}'"
+  system "gem push #{name}-#{version}.gem"
+end
+
+def gem_name
+  name, version = gemspec_details
+  "#{name}-#{version}.gem"
+end
+
+def gemspec_details
   gemspec = File.read('merrol.gemspec')
   name = gemspec.scan(/s\.name.*=.*"(.*)"/).first.first
   version = gemspec.scan(/s\.version.*=.*"(.*)"/).first.first
-  system "git tag -a v#{version} -m 'Version #{version}'"
-  system "gem push #{name}-#{version}.gem"
+  [name, version]
 end
 

@@ -2,6 +2,7 @@ Merrol
 ======
 Minimalist Editor for Ruby, Rails and Other Languages
 
+
 Status
 ----------------------------------
 **Under development (October 2010)**
@@ -13,6 +14,7 @@ What
 ----------------------------------
 An editor for Ruby, Rails and supporting langauges, written in pure Ruby (1.9) and GTK using some Rails idioms with an open design to allow customization and enhancement.
 
+
 Why
 ----------------------------------
 I noticed, while using other editors that I found myself constantly re-arranging windows to get the optimum setup. I was also frustrated by little bugs, design issues and sensible shortcuts. I thought, there must be a better way.
@@ -20,6 +22,7 @@ I noticed, while using other editors that I found myself constantly re-arranging
 I want to make an editor that is really easy to tweak. Users would be able to fork it and customize it as they saw fit. It will also make use of existing apps such as autotest and rails generators and commands such as grep.
 
 I want to challenge the conventional editor design and take a different approach to editing. One that doesn't involve a mouse but one that can be learnt quickly.
+
 
 Goals
 ----------------------------------
@@ -43,6 +46,7 @@ It will be developed primarily for the Linux OS in particular it uses ruby GNOME
 It will not be a full blown IDE. There are plenty of these about and I don't believe they are necessary for Ruby or Rails development.
 
 It will not support TextMate bundles.
+
 
 Features
 ----------------------------------
