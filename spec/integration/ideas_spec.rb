@@ -5,7 +5,7 @@ describe 'ideas' do
     it 'move past quotes or brackets when TAB pressed'
     it 'support nested quotes and brackets'
     it 'ignore TAB completion when already in TAB completion'
-    it 'complete words sometimes (when using multiple instances)'
+    it 'complete words sometimes'
   end
 
   it 'splits screen and switches to it when ALT+RIGHT pressed'
@@ -13,7 +13,7 @@ describe 'ideas' do
   it 'shortcut of the day in status bar'
   it 'options to turn off shortcut of the day'
 
-  it 'giving a filename _spec.rb inserts the spec.rb template (see config/templates)'
+  it 'Adding a new file automatically adds spec/test file'
 
   describe 'snippets' do
     it 'handle multi-choice parameters by TABing through and pressing ENTER on the desired option'

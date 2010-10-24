@@ -7,25 +7,16 @@ Rspec.configure do |c|
       end
     end
 
-    unless $application
-      puts 'Starting new app...'
-      $application = Application.new WORKING_DIR, ['README.md']
-    end
+    $application = Application.new WORKING_DIR, [] unless $application
   end
 end
 
-# Like a single pass through Gtk.main but does not block allowing tests to finish
 def process_events
   while Gtk.events_pending?
     Gtk.main_iteration
   end
 end
 
-def show_ui
-  Gtk.main
-end
-
-# e.g. find_widget :named => 'something'
 def find_widget name, application = nil
   widget = (application || $application).views[name]
   raise "Cannot find widget: #{name}." unless widget
@@ -70,10 +61,17 @@ def shows widget_name
 end
 
 # e.g. displays 'the_file', :in => 'open.results'
-def displays text, options = {}
+def displays expected, options = {}
   widget = find_widget(options[:in] || options[:into], options[:test_against])
-  buffer = widget.is_a?(Gtk::TextView) ? widget.buffer : widget
-  buffer.text.should == text
+
+  if widget.is_a?(Gtk::Image)
+    text = widget.file
+  elsif widget.is_a?(Gtk::TextView)
+    text = widget.buffer.text
+  else
+    text = widget.text
+  end
+  text.should match expected
 end
 
 # e.g. loads :into => 'editor'

@@ -1,6 +1,6 @@
 require 'integration_helper'
 
-describe 'Editor' do
+describe 'Loading and saving' do
   before(:each) do
     @the_contents = 'Some prewritten text. '
     create_file 'the_file', :containing => @the_contents
