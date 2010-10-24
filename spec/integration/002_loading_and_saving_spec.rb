@@ -19,10 +19,10 @@ describe 'Loading and saving' do
     displays 'the_file', :in => 'open.results'
 
     pressing 'ENTER'
-    loads @the_contents, :into => 'editor'
+    loads @the_contents, :into => :edit
 
-    entering 'some text', :into => 'editor'
-    displays 'some text', :in => 'editor'
+    entering 'some text', :into => :edit
+    displays 'some text', :in => :edit
 
     pressing 'CTRL+S'
     saves @the_contents + 'some text', :in => 'the_file'

@@ -23,6 +23,10 @@ def find_widget name, application = nil
   widget
 end
 
+def load_file name
+  $application.controllers['file'].load name
+end
+
 # e.g. create_file 'the_file', :containing => @the_contents
 def create_file name, options
   File.open(name, "w") do |f|
@@ -36,7 +40,7 @@ end
 
 # e.g. pressing 'CTRL+S'
 def pressing key, options = {}
-  widget = options[:in] || Gtk::Window.toplevels.first
+  widget = options[:in] || find_widget(:main, options[:test_against])
   widget.grab_focus
 
   event = Shortcut.to_event(key)
@@ -60,7 +64,11 @@ def shows widget_name
   find_widget(widget_name).should be_visible
 end
 
-# e.g. displays 'the_file', :in => 'open.results'
+def does_not_show widget_name
+  find_widget(widget_name).should_not be_visible
+end
+
+# e.g. displays 'the_file', :in => :edit
 def displays expected, options = {}
   widget = find_widget(options[:in] || options[:into], options[:test_against])
 
@@ -68,6 +76,11 @@ def displays expected, options = {}
     text = widget.file
   elsif widget.is_a?(Gtk::TextView)
     text = widget.buffer.text
+  elsif widget.is_a?(Gtk::ListView)
+    text = []
+    widget.model.each { |model, path, iter| text << iter[0] }
+    text = text.join(',')
+    expected = expected.join(',')
   else
     text = widget.text
   end

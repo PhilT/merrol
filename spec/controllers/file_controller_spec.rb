@@ -5,7 +5,7 @@ describe FileController do
     @mock_commands = mock Commands, :register => nil
     @mock_main = mock Gtk::Window
     @mock_image = mock Gtk::Image
-    @mock_list = mock Gtk::ListView, :selected_to_top => nil
+    @mock_list = mock Gtk::ListView, :selected_to_top => nil, :prepend => nil, :empty? => false
     @mock_theme = mock Gtk::SourceStyleScheme
     @mock_edit = mock(Gtk::SourceView, :theme => @mock_theme, :highlight_brackets => true)
     @mock_views = {
@@ -23,16 +23,26 @@ describe FileController do
     mock SourceModel, :style_scheme= => nil, :highlight_matching_brackets= => nil, :modified= => nil, :signal_connect => nil
   end
 
-  it 'creates the source models' do
-    SourceModel.should_receive(:new).with('path1').and_return @mock_source_model
-    SourceModel.should_receive(:new).with('path2').and_return @mock_source_model
-    @mock_edit.should_receive(:buffer=).once.with @mock_source_model
-    @mock_source_model.should_receive(:modified=).with false
-    @mock_source_model.should_receive(:style_scheme=).with @mock_theme
-    @mock_source_model.should_receive(:highlight_matching_brackets=).with true
+  describe '#load_all' do
+    it 'creates the source models' do
+      SourceModel.should_receive(:new).with('path1').and_return @mock_source_model
+      SourceModel.should_receive(:new).with('path2').and_return @mock_source_model
+      @mock_edit.should_receive(:buffer=).once.with @mock_source_model
+      @mock_source_model.should_receive(:modified=).with false
+      @mock_source_model.should_receive(:style_scheme=).with @mock_theme
+      @mock_source_model.should_receive(:highlight_matching_brackets=).with true
 
-    file = FileController.new @mock_commands, @mock_views
-    file.load_all ['path1', 'path2']
+      file = FileController.new @mock_commands, @mock_views
+      file.load_all ['path1', 'path2']
+    end
+  end
+
+  describe '#load' do
+    it 'adds name to file list' do
+      @mock_list.should_receive(:prepend).with 'path'
+      file = FileController.new @mock_commands, @mock_views
+      file.load 'path'
+    end
   end
 
   it 'requests source model to save' do
@@ -74,23 +84,36 @@ describe FileController do
       before(:each) do
         @mock_main.stub :signal_connect
         @next_mock_source_model = mock_source_model
-        SourceModel.stub(:new).with('path1').and_return @mock_source_model
-        SourceModel.stub(:new).with('path2').and_return @next_mock_source_model
         @file = FileController.new @mock_commands, @mock_views
         @file.stub :id=
-        @file.load_all ['path1', 'path2']
       end
 
-      it 'displays file_list when shortcut pressed' do
-        @mock_list.should_receive :show
-        @file.switch
+      context 'when list has two items' do
+        before(:each) do
+          SourceModel.stub(:new).with('path1').and_return @mock_source_model
+          SourceModel.stub(:new).with('path2').and_return @next_mock_source_model
+          @file.load_all ['path1', 'path2']
+        end
+
+        it 'displays file_list when shortcut pressed' do
+          @mock_list.should_receive :show
+          @file.switch
+        end
+
+        it 'highlight second file in the list' do
+          @mock_list.should_receive(:next)
+          @mock_list.should_receive(:selected).and_return 'path2'
+          @mock_edit.should_receive(:buffer=).with(@next_mock_source_model)
+          @file.switch
+        end
       end
 
-      it 'highlight second file in the list' do
-        @mock_list.should_receive(:next)
-        @mock_list.should_receive(:selected).and_return 'path2'
-        @mock_edit.should_receive(:buffer=).with(@next_mock_source_model)
-        @file.switch
+      context 'when list is empty' do
+        it 'list is not shown and nothing happens' do
+          @mock_list.stub(:empty?).and_return true
+          @mock_list.should_not_receive :show
+          @file.switch
+        end
       end
     end
 

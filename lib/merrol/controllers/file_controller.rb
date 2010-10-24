@@ -6,6 +6,7 @@ module Merrol
     end
 
     def switch
+      return if file_list_view.empty?
       file_list_view.show
       file_list_view.next
       edit_view.buffer = @source_models[file_list_view.selected]
@@ -40,6 +41,7 @@ module Merrol
         end
       end
       edit_view.buffer = model
+      file_list_view.prepend path
     end
 
     def load_all paths

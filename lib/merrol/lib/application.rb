@@ -18,7 +18,7 @@ module Merrol
       @controllers['main'].working_dir = working_dir
       @controllers['file'].load_all paths
 
-      @views[:file_list].list = paths
+      # TODO: move both to a controller
       @views[:file_path].text = paths.last if paths.last
       @views[:edit].grab_focus
 

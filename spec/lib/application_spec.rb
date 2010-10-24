@@ -39,11 +39,6 @@ describe Application do
     Application.new nil, ['paths']
   end
 
-  it 'populates file list' do
-    @mock_file_list.should_receive(:list=).with ['paths']
-    Application.new nil, ['paths']
-  end
-
   it 'sets file path' do
     @mock_file_path.should_receive(:text=).with 'path'
     Application.new nil, ['path']
