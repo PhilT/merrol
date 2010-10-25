@@ -1,8 +1,15 @@
 require 'spec_helper'
 
 describe Shortcut do
-  def self.event modifiers, key
-    e = Gdk::EventKey.new(Gdk::Event::KEY_PRESS)
+  def self.build_events modifiers, key
+    {
+      :press => build_event(Gdk::Event::KEY_PRESS, modifiers, key),
+      :release => build_event(Gdk::Event::KEY_RELEASE, modifiers, key)
+    }
+  end
+
+  def self.build_event type, modifiers, key
+    e = Gdk::EventKey.new(type)
     e.state = modifiers ? modifiers : e.state
     e.keyval = key
     e
@@ -13,7 +20,7 @@ describe Shortcut do
       modifiers = (state.control_mask? ? 1 : 0) |
         (state.mod1_mask? ? 2 : 0) |
         (state.shift_mask? ? 4 : 0)
-      "#<Gdk::EventKey with state: #{modifiers}, keyval: #{keyval}, keycode: #{hardware_keycode}>"
+      "#<Gdk::EventKey #{event_type.name} with state: #{modifiers}, keyval: #{keyval}, keycode: #{hardware_keycode}>"
     end
 
     def == other
@@ -27,20 +34,24 @@ describe Shortcut do
   SHIFT_KEY = Gdk::Window::SHIFT_MASK
 
   @keys_events = {
-    'CTRL' => event(nil, Gdk::Keyval::GDK_Control_L),
-    'ESC' => event(nil, Gdk::Keyval::GDK_Escape),
-    'ALT+ENTER' => event(ALT_KEY, Gdk::Keyval::GDK_Return),
-    'CTRL+S' => event(CTRL_KEY, S_KEY),
-    'CTRL+TAB' => event(CTRL_KEY, Gdk::Keyval::GDK_Tab),
-    'CTRL+SHIFT+S' => event(CTRL_KEY | SHIFT_KEY, S_KEY),
-    'CTRL+ALT+SHIFT+S' => event(CTRL_KEY | ALT_KEY | SHIFT_KEY, S_KEY)
+    'CTRL' => build_events(nil, Gdk::Keyval::GDK_Control_L),
+    'ESC' => build_events(nil, Gdk::Keyval::GDK_Escape),
+    'ALT+ENTER' => build_events(ALT_KEY, Gdk::Keyval::GDK_Return),
+    'CTRL+S' => build_events(CTRL_KEY, S_KEY),
+    'CTRL+TAB' => build_events(CTRL_KEY, Gdk::Keyval::GDK_Tab),
+    'CTRL+SHIFT+S' => build_events(CTRL_KEY | SHIFT_KEY, S_KEY),
+    'CTRL+ALT+SHIFT+S' => build_events(CTRL_KEY | ALT_KEY | SHIFT_KEY, S_KEY)
   }.each do |key, event|
-    it "returns #{key} from a #{event.inspect}" do
-      Shortcut.from(event).should == key
+    it "returns #{key} from a #{event[:press].inspect}" do
+      Shortcut.from(event[:press]).should == key
     end
 
-    it "returns #{event.inspect} from #{key}" do
-      Shortcut.to_event(key).should == event
+    it "returns #{event[:press].inspect} from #{key}" do
+      Shortcut.to_event(key).should == event[:press]
+    end
+
+    it "returns #{event[:release].inspect} from #{key}" do
+      Shortcut.to_event(key, :release).should == event[:release]
     end
   end
 

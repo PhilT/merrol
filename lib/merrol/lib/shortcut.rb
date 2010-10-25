@@ -15,8 +15,8 @@ module Merrol
       shortcut
     end
 
-    def self.to_event key
-      event = Gdk::EventKey.new(Gdk::Event::KEY_PRESS)
+    def self.to_event key, release = nil
+      event = Gdk::EventKey.new(release ? Gdk::Event::KEY_RELEASE : Gdk::Event::KEY_PRESS)
       key = key.gsub(/ESC/, 'ESCAPE').gsub(/ENTER/, 'RETURN')
 
       if %w(CTRL ALT SHIFT).include? key

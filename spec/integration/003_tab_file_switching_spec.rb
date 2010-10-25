@@ -2,15 +2,15 @@ require 'integration_helper'
 
 describe 'CTRL+TAB file switching' do
   before(:each) do
-    @contents_of_a_file = 'Contents of a file.'
-    @contents_of_another_file = 'Contents of another file.'
-    create_file 'a_file', :containing => @contents_of_a_file
-    create_file 'another_file', :containing => @contents_of_another_file
+    create_file 'a_file', :containing => some_text_in('a_file')
+    create_file 'another_file', :containing => some_text_in('another_file')
+    create_file 'a_third_file', :containing => some_text_in('a_third_file')
   end
 
   after(:each) do
     destroy_file 'a_file'
     destroy_file 'another_file'
+    destroy_file 'a_third_file'
   end
 
   it 'switches to second file' do
@@ -22,6 +22,9 @@ describe 'CTRL+TAB file switching' do
     pressing 'CTRL+TAB'
     shows :file_list
     displays ['another_file', 'a_file'], :in => :file_list
+    highlights 'a_file', :in => :file_list
+
+    releasing 'CTRL+TAB'
   end
 end
 
