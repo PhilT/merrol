@@ -6,6 +6,7 @@ end
 def does_not_show widget_name
   find_widget(widget_name).should_not be_visible
 end
+alias hides does_not_show
 
 # e.g. displays 'the_file', :in => :edit
 def displays expected, options = {}

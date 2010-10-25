@@ -28,4 +28,5 @@ end
 def some_text_in filename
   "some text in #{filename}"
 end
+alias some_text_from some_text_in
 
