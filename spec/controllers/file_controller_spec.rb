@@ -5,7 +5,7 @@ describe FileController do
     @mock_commands = mock Commands, :register => nil
     @mock_main = mock Gtk::Window
     @mock_image = mock Gtk::Image
-    @mock_list = mock Gtk::ListView, :selected_to_top => nil, :prepend => nil, :empty? => false
+    @mock_list = mock Gtk::ListView, :selected_to_top => nil, :prepend => nil, :empty? => false, :hide => nil
     @mock_theme = mock Gtk::SourceStyleScheme
     @mock_edit = mock(Gtk::SourceView, :theme => @mock_theme, :highlight_brackets => true)
     @mock_views = {
@@ -16,7 +16,22 @@ describe FileController do
     }
     @mock_source_model = mock_source_model
     SourceModel.stub!(:new).and_return @mock_source_model
+    @mock_main.stub :signal_handler_disconnect
+    @mock_edit.stub :scroll_to_cursor
     @mock_edit.stub!(:buffer=)
+  end
+
+  class Gdk::EventKey
+    def inspect
+      modifiers = (state.control_mask? ? 1 : 0) |
+        (state.mod1_mask? ? 2 : 0) |
+        (state.shift_mask? ? 4 : 0)
+      "#<Gdk::EventKey #{event_type.name} with state: #{modifiers}, keyval: #{keyval}, keycode: #{hardware_keycode}>"
+    end
+
+    def == other
+      inspect == other.inspect
+    end
   end
 
   def mock_source_model
@@ -95,16 +110,30 @@ describe FileController do
           @file.load_all ['path1', 'path2']
         end
 
-        it 'displays file_list when shortcut pressed' do
-          @mock_list.should_receive :show
-          @file.switch
+        context 'when shortcut pressed, released and pressed' do
+          it 'does not display file_list' do
+            @mock_list.should_not_receive :show
+            event = Shortcut.to_event('CTRL', :release)
+            @mock_main.stub(:signal_connect).with('key_release_event').and_yield(nil, event)
+            @file.switch
+            @file.switch
+          end
         end
 
-        it 'highlight second file in the list' do
-          @mock_list.should_receive(:next)
-          @mock_list.should_receive(:selected).and_return 'path2'
-          @mock_edit.should_receive(:buffer=).with(@next_mock_source_model)
-          @file.switch
+        context 'when shortcut pressed the second time' do
+          it 'displays file_list' do
+            @mock_list.should_receive :show
+            @file.switch
+            @file.switch
+          end
+
+          it 'highlight second file in the list' do
+            @mock_list.should_receive(:next)
+            @mock_list.should_receive(:selected).and_return 'path2'
+            @mock_edit.should_receive(:buffer=).with(@next_mock_source_model)
+            @file.switch
+            @file.switch
+          end
         end
       end
 
@@ -119,10 +148,9 @@ describe FileController do
 
     context 'when releasing TAB' do
       it 'does nothing' do
-        @event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
-        @event.keyval = Gdk::Keyval::GDK_Tab
+        event = Shortcut.to_event('TAB', :release)
         file = FileController.new @mock_commands, @mock_views
-        @mock_main.stub(:signal_connect).and_yield nil, @event
+        @mock_main.stub(:signal_connect).and_yield nil, event
         @mock_list.should_not_receive :hide
         @mock_main.should_not_receive :signal_handler_disconnect
         file.switch
@@ -132,10 +160,8 @@ describe FileController do
     context 'when releasing modifier' do
       before(:each) do
         @mock_edit.stub(:scroll_to_cursor)
-        @event = Gdk::EventKey.new(Gdk::Event::KEY_RELEASE)
-        @event.keyval = Gdk::Keyval::GDK_Control_L
+        @event = Shortcut.to_event("CTRL", :release)
         @mock_list.stub :hide
-        @mock_main.stub :signal_handler_disconnect
       end
 
       it 'moves selected file to the top of the list' do

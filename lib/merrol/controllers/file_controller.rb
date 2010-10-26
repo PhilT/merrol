@@ -7,14 +7,16 @@ module Merrol
 
     def switch
       return if file_list_view.empty?
-      file_list_view.show
+      file_list_view.show if @second_switch
+      @second_switch = true
       file_list_view.next
       edit_view.buffer = @source_models[file_list_view.selected]
+      edit_view.scroll_to_cursor
       self.handler_id = main_view.signal_connect('key_release_event') do |widget, event|
         if event.keyval == Gdk::Keyval::GDK_Control_L
+          @second_switch = false
           file_list_view.hide
           main_view.signal_handler_disconnect(handler_id)
-          edit_view.scroll_to_cursor
           file_list_view.selected_to_top
           true
         else

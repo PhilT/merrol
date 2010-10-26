@@ -20,17 +20,30 @@ describe 'CTRL+TAB file switching' do
     load_file 'a_file'
     load_file 'another_file'
     load_file 'a_third_file'
-    pressing 'CTRL+TAB'
-    shows :file_list
-    displays ['a_third_file', 'another_file', 'a_file'], :in => :file_list
-    highlights 'another_file', :in => :file_list
+    displays some_text_from('a_third_file'), :in => :edit
 
     pressing 'CTRL+TAB'
+    does_not_show :file_list
+    displays some_text_from('another_file'), :in => :edit
+
+    releasing 'CTRL'
+    pressing 'CTRL+TAB'
+    does_not_show :file_list
+    displays some_text_from('a_third_file'), :in => :edit
+
+    pressing 'CTRL+TAB'
+    shows :file_list
     highlights 'a_file', :in => :file_list
+    displays ['another_file', 'a_third_file', 'a_file'], :in => :file_list
 
     releasing 'CTRL'
     hides :file_list
     displays some_text_from('a_file'), :in => :edit
+
+    pressing 'CTRL+TAB'
+    does_not_show :file_list
+    releasing 'CTRL'
   end
+
 end
 
