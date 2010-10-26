@@ -1,7 +1,6 @@
 require 'integration_helper'
 
 describe 'Startup' do
-
   it 'sets the working dir' do
     $application.views[:main].title.should =~ /merrol \(\/home\/.*\)/
   end

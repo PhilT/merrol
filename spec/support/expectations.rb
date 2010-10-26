@@ -1,4 +1,3 @@
-# e.g. shows 'open'
 def shows widget_name
   find_widget(widget_name).should be_visible
 end
@@ -8,7 +7,6 @@ def does_not_show widget_name
 end
 alias hides does_not_show
 
-# e.g. displays 'the_file', :in => :edit
 def displays expected, options = {}
   widget = find_widget(options[:in] || options[:into], options[:test_against])
 
@@ -32,17 +30,14 @@ def highlights item, options = {}
   widget.selection.selected[0].should == item
 end
 
-# e.g. loads :into => 'editor'
 def loads contents, options = {}
   displays contents, options
 end
 
-# e.g. saves the_contents, :in => 'the_file'
-def saves contents, file
-  File.read(file).should == contents
+def saves contents, options = {}
+  File.read(options[:in]).should == contents
 end
 
-# e.g. quits
 def quits_by_pressing key
   $application.controllers['main'].should_receive(:quit)
   pressing key, :in => find_widget(:main)
