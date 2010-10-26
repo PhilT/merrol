@@ -35,7 +35,7 @@ describe FileController do
   end
 
   def mock_source_model
-    mock SourceModel, :style_scheme= => nil, :highlight_matching_brackets= => nil, :modified= => nil, :signal_connect => nil
+    mock SourceModel, :style_scheme= => nil, :highlight_matching_brackets= => nil, :modified= => nil, :signal_connect => nil, :start_iter => nil, :place_cursor => nil
   end
 
   describe '#load_all' do
@@ -55,6 +55,14 @@ describe FileController do
   describe '#load' do
     it 'adds name to file list' do
       @mock_list.should_receive(:prepend).with 'path'
+      file = FileController.new @mock_commands, @mock_views
+      file.load 'path'
+    end
+
+    it 'positions cursor at start of file' do
+      mock_iter = mock Gtk::TextIter
+      @mock_source_model.should_receive(:start_iter).and_return mock_iter
+      @mock_source_model.should_receive(:place_cursor).with mock_iter
       file = FileController.new @mock_commands, @mock_views
       file.load 'path'
     end

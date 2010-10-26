@@ -35,6 +35,7 @@ module Merrol
       model.style_scheme = edit_view.theme
       model.highlight_matching_brackets = edit_view.highlight_brackets
       model.modified = false
+      model.place_cursor model.start_iter
       model.signal_connect('modified_changed') do
         if model.modified?
           file_status_view.file = 'data/images/modified.svg'
