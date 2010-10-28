@@ -1,3 +1,5 @@
+require_relative  'prerequisites'
+
 require 'gtk2'
 require 'gtksourceview2'
 require 'yaml'

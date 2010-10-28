@@ -38,9 +38,9 @@ module Merrol
       model.place_cursor model.start_iter
       model.signal_connect('modified_changed') do
         if model.modified?
-          file_status_view.file = 'data/images/modified.svg'
+          file_status_view.file = File.app_relative('data/images/modified.svg')
         else
-          file_status_view.file = 'data/images/saved.svg'
+          file_status_view.file = File.app_relative('data/images/saved.svg')
         end
       end
       edit_view.buffer = model

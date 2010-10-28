@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "merrol"
-  s.version     = "0.0.0"
+  s.version     = "0.0.1"
   s.authors     = "Phil Thompson"
   s.email       = "phil@electricvisions.com"
   s.homepage    = "http://merrol.com"
@@ -8,6 +8,8 @@ Gem::Specification.new do |s|
   s.description = "An editor for Ruby, Rails and supporting langauges, written in pure Ruby with an open design to allow customization and improvement."
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "merrol"
+
+  s.add_dependency "activesupport"
 
   s.add_development_dependency "autotest"
   s.add_development_dependency "simplecov"
