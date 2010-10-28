@@ -16,10 +16,20 @@ What
 ----------------------------------
 An editor for Ruby, Rails and supporting langauges, written in pure Ruby (1.9) and GTK using some Rails idioms with an open design to allow customization and enhancement.
 
+Usage
+----------------------------------
+To install:
+    gem install merrol
+
+To run:
+    m [file1, file2, ...]
+
+Currently only tested on Ubuntu 10.04. It will check the required packages are installed and prompt to install them if not.
+
 
 Why
 ----------------------------------
-I noticed, while using other editors that I found myself constantly re-arranging windows to get the optimum setup. I was also frustrated by little bugs, design issues and sensible shortcuts. I thought, there must be a better way.
+I noticed, while using other editors that I found myself constantly re-arranging windows to get the optimum setup. I was also frustrated by little bugs, design issues and lack of sensible shortcuts. I thought, there must be a better way.
 
 I want to make an editor that is really easy to tweak. Users would be able to fork it and customize it as they saw fit. It will also make use of existing apps such as autotest and rails generators and commands such as grep.
 
@@ -30,11 +40,11 @@ Goals
 ----------------------------------
 To get the most out of a screen whether it's a 30" desktop or a 13" laptop. Control screens without having to resize windows. Maximize the workspace.
 
-Foremost, it will be a Rails and Ruby editor with an emphasis on Behaviour and Test Driven Development. There will be nothing stopping it being customized for other languages and there will be nothing to stop it being forked or plugins added, although a plugin system is not currently planned.
+Foremost, it will be a Rails and Ruby editor with an emphasis on Behaviour and Test Driven Development. There will be nothing stopping it being customized for other languages or being forked to change behaviour.
 
 No toolbars, menus, icons or any other extra fluff. Straightforward shortcuts will allow access to all functions.
 
-It will be robust, built with well factored, well tested, pure Ruby code
+It will be robust, built with well factored, well tested, pure Ruby code.
 
 There will be no dialogs. Panels will allow a more versatile and accessible way to accept input.
 
@@ -48,6 +58,8 @@ It will be developed primarily for the Linux OS in particular it uses ruby GNOME
 It will not be a full blown IDE. There are plenty of these about and I don't believe they are necessary for Ruby or Rails development.
 
 It will not support TextMate bundles.
+
+A plugin system is not currently planned.
 
 
 Features
