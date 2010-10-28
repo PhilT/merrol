@@ -4,6 +4,7 @@ if ENV['COVERAGE']
     add_filter '/spec/'
     add_filter '/autotest/'
     add_filter '/bin/'
+    add_filter 'prerequisites.rb'
 
     add_group 'Controllers', 'controllers/'
     add_group 'Models', 'models/'
