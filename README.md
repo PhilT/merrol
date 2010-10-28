@@ -11,11 +11,11 @@ Status
 
 **Next** v0.0.3
 
-* Show Keyboard shortcuts
+* Show Keyboard shortcuts (F1)
 * Open file in the current window with fuzzy matcher (CTRL+O)
 * Close file (CTRL+W)
 
-Checkout the [ROADMAP.md](merrol/blob/master/ROADMAP.md) for more.
+Checkout the [ROADMAP](merrol/blob/master/ROADMAP.md) for more.
 
 What
 ----------------------------------
