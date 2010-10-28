@@ -1,10 +1,8 @@
 require 'gtk2'
 require 'gtksourceview2'
 require 'yaml'
-require File.expand_path(File.dirname(__FILE__) + '/yaml.rb')
-require File.expand_path(File.dirname(__FILE__) + '/file.rb')
-require_relative 'command_dispatcher'
-include Merrol::CommandDispatcher
+require_relative('lib/yaml.rb')
+require_relative('lib/file.rb')
 load_commands
 
 window = Gtk::Window.new "Keyboard Shortcuts"

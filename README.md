@@ -9,8 +9,11 @@ Status
 
 **The first release is out (0.0.2)!** It has syntax highlighting, loads mulitple files (from command line), save (CTRL+S) and switch files (CTRL+TAB). It should be stable but there isn't much to it yet.
 
-Next up is Open (CTRL+O). Quite a few commands rely on this panel so this should enable other things to follow quickly.
-
+**Next** v0.0.3
+* Show Keyboard shortcuts
+* Open file in the current window with fuzzy matcher (CTRL+O)
+* Close file (CTRL+W)
+Checkout the [ROADMAP.md](ROADMAP.md) for details
 
 What
 ----------------------------------
