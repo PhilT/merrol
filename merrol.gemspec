@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "merrol"
-  s.version     = "0.0.1"
+  s.version     = "0.0.2"
   s.authors     = "Phil Thompson"
   s.email       = "phil@electricvisions.com"
   s.homepage    = "http://merrol.com"

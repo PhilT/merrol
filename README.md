@@ -7,7 +7,9 @@ Status
 ----------------------------------
 **Under development (October 2010)**
 
-The first milestone (0.0.1) will soon be released. This will have syntax highlighting, load mulitple files (from command line), save (CTRL+S) and switch files (CTRL+TAB). It should be stable but there isn't much to it yet.
+**The first release is out (0.0.2)!** It has syntax highlighting, loads mulitple files (from command line), save (CTRL+S) and switch files (CTRL+TAB). It should be stable but there isn't much to it yet.
+
+Next up is Open (CTRL+O). Quite a few commands rely on this panel so this should enable other things to follow quickly.
 
 
 What

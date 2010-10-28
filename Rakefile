@@ -45,7 +45,7 @@ end
 desc 'takes the version in the gemspec creates a git tag and sends the gem to rubygems'
 task :release do
   name, version = gemspec_details
-  system "git tag -a v#{version} -m 'Version #{version}'"
+  system "git tag -f -a v#{version} -m 'Version #{version}'"
   system "gem push #{name}-#{version}.gem"
 end
 
