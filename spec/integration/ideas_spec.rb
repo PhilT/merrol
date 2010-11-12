@@ -5,9 +5,12 @@ describe 'ideas' do
     it 'move past quotes or brackets when TAB pressed'
     it 'support nested quotes and brackets'
     it 'ignore TAB completion when already in TAB completion'
-    it 'complete words sometimes'
-    it 'paste at current cursor location'
-  end
+    it 'complete words all the time'
+    it 'paste at current cursor location all the time'
+    it 'handle non-matching quotes in a regex within an array' do
+      pending # This fails to highlight correctly: [/'/]
+    end
+ end
 
   it 'splits screen and switches to it when ALT+RIGHT pressed'
   it 'switches to existing split screen when ALT+RIGHT pressed'

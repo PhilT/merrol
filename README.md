@@ -66,6 +66,8 @@ It will not support TextMate bundles.
 
 A plugin system is not currently planned.
 
+Code-folding will never be supported. If you need code-folding your files are too big.
+
 
 Features
 ----------------------------------
