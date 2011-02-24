@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name        = "merrol"
   s.version     = "0.0.2"
   s.authors     = "Phil Thompson"
-  s.email       = "phil@electricvisions.com"
+  s.email       = Base64.decode64("cGhpbEBlbGVjdHJpY3Zpc2lvbnMuY29t\n")
   s.homepage    = "http://merrol.com"
   s.summary     = "MERROL - Minimalist Editor for Ruby, Rails and Other Languages"
   s.description = "An editor for Ruby, Rails and supporting langauges, written in pure Ruby with an open design to allow customization and improvement."
