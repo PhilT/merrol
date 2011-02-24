@@ -15,10 +15,10 @@ describe FileController do
       :file_list => @mock_list
     }
     @mock_source_model = mock_source_model
-    SourceModel.stub!(:new).and_return @mock_source_model
+    SourceModel.stub(:new).and_return @mock_source_model
     @mock_main.stub :signal_handler_disconnect
     @mock_edit.stub :scroll_to_cursor
-    @mock_edit.stub!(:buffer=)
+    @mock_edit.stub :buffer=
   end
 
   class Gdk::EventKey
@@ -42,7 +42,7 @@ describe FileController do
     it 'creates the source models' do
       SourceModel.should_receive(:new).with('path1').and_return @mock_source_model
       SourceModel.should_receive(:new).with('path2').and_return @mock_source_model
-      @mock_edit.should_receive(:buffer=).once.with @mock_source_model
+      @mock_edit.should_receive(:buffer=).with @mock_source_model
       @mock_source_model.should_receive(:modified=).with false
       @mock_source_model.should_receive(:style_scheme=).with @mock_theme
       @mock_source_model.should_receive(:highlight_matching_brackets=).with true
@@ -182,7 +182,7 @@ describe FileController do
       it 'hides file_list' do
         @mock_list.should_receive :hide
 
-        @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, @event).and_return 1
+        @mock_main.stub(:signal_connect).with('key_release_event').and_yield(nil, @event).and_return 1
         file = FileController.new @mock_commands, @mock_views
         file.should_receive(:handler_id=).with(1)
         file.should_receive(:handler_id).and_return 1
@@ -197,7 +197,7 @@ describe FileController do
       end
 
       it 'disconnect handler is called with the correct handler id' do
-        @mock_main.stub!(:signal_connect).with('key_release_event').and_yield(nil, @event)
+        @mock_main.stub(:signal_connect).with('key_release_event').and_yield(nil, @event)
         @mock_main.should_receive(:signal_handler_disconnect).with 1
         file = FileController.new @mock_commands, @mock_views
         file.send(:handler_id=, 1)

@@ -5,9 +5,16 @@ Minimalist Editor for Ruby, Rails and Other Languages
 
 Status
 ----------------------------------
-**Under development (October 2010)**
+**Under development (Feburary 2011)**
 
-**The first release is out (0.0.2)!** It has syntax highlighting, loads mulitple files (from command line), save (CTRL+S) and switch files (CTRL+TAB). It should be stable but there isn't much to it yet.
+**Current** v0.0.2
+
+* Syntax highlighting
+* Load mulitple files (from command line)
+* Save (CTRL+S)
+* Switch files (CTRL+TAB).
+
+It should be stable but there isn't much to it yet.
 
 **Next** v0.0.3
 
@@ -25,6 +32,7 @@ Usage
 ----------------------------------
 To install:
     gem install merrol
+
 
 To run:
     m [file1, file2, ...]

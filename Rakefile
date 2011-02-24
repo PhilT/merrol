@@ -1,13 +1,24 @@
+require 'rspec/core/rake_task'
+
 desc 'runs the specs (except integration)'
-task :spec do
-  specs = (Dir['spec/*/'] - ['spec/integration/']).join(' ')
-  coverage = 'export COVERAGE=true && ' if ENV['COVERAGE']
-  raise 'FAILED: Specs' unless system "#{coverage}rspec #{specs}"
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.pattern = [
+    "./spec/controllers/*_spec.rb",
+    "./spec/gtk/*_spec.rb",
+    "./spec/lib/*_spec.rb",
+    "./spec/models/*_spec.rb"
+  ]
 end
 
 desc 'runs integration specs'
-task :integration do
-  raise 'FAILED: Integration' unless system 'rspec spec/integration'
+RSpec::Core::RakeTask.new(:integration) do |t|
+  t.pattern = "./spec/integration/*_spec.rb"
+end
+
+desc "Generate code coverage"
+task :coverage do
+  ENV['COVERAGE'] = 'true'
+  Rake::Task['spec'].invoke
 end
 
 desc 'builds the gem'
@@ -34,12 +45,6 @@ end
 desc 'tests, builds, installs and runs the app'
 task :default => [:spec, :integration, :build, :install] do
   system 'm'
-end
-
-desc 'code coverage'
-task :coverage do
-  ENV['COVERAGE'] = 'true'
-  Rake::Task['spec'].invoke
 end
 
 desc 'takes the version in the gemspec creates a git tag and sends the gem to rubygems'

@@ -9,11 +9,14 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "merrol"
 
+  s.add_dependency "i18n"
   s.add_dependency "activesupport"
+  s.add_dependency "colored"
 
   s.add_development_dependency "autotest"
   s.add_development_dependency "simplecov"
-  s.add_development_dependency "rspec", '2.0.0'
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "gtksourceview2"
 
   s.files              = `git ls-files`.split("\n")
   s.test_files         = `git ls-files -- spec/*`.split("\n")
