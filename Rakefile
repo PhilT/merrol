@@ -1,35 +1,29 @@
 require 'rspec/core/rake_task'
 
+desc 'tests, builds, installs and runs the app'
+task :default => [:coverage, :integration, :install] do
+  system 'm'
+end
+
 desc 'runs the specs (except integration)'
 RSpec::Core::RakeTask.new(:spec) do |t|
   t.pattern = [
-    "./spec/controllers/*_spec.rb",
-    "./spec/gtk/*_spec.rb",
-    "./spec/lib/*_spec.rb",
-    "./spec/models/*_spec.rb"
+    './spec/controllers/*_spec.rb',
+    './spec/gtk/*_spec.rb',
+    './spec/lib/*_spec.rb',
+    './spec/models/*_spec.rb'
   ]
 end
 
-desc 'runs integration specs'
-RSpec::Core::RakeTask.new(:integration) do |t|
-  t.pattern = "./spec/integration/*_spec.rb"
-end
-
-desc "Generate code coverage"
+desc 'Generate code coverage'
 task :coverage do
   ENV['COVERAGE'] = 'true'
   Rake::Task['spec'].invoke
 end
 
-desc 'builds the gem'
-task :build do
-  raise 'FAILED: Unable to build gem' unless system 'gem build merrol.gemspec'
-end
-
-desc 'builds and installs the gem'
-task :install => :build do
-  system "gem uninstall -x merrol"
-  raise 'FAILED: Unable to install gem' unless system "gem install #{gem_name}"
+desc 'runs integration specs'
+RSpec::Core::RakeTask.new(:integration) do |t|
+  t.pattern = './spec/integration/*_spec.rb'
 end
 
 desc 'run local app. Loads application.rb by default. Override with f=file,file,file'
@@ -42,28 +36,27 @@ task :run do
   end
 end
 
-desc 'tests, builds, installs and runs the app'
-task :default => [:spec, :integration, :build, :install] do
-  system 'm'
+desc 'Build and install the gem'
+task :install do
+  gemspec_path = Dir['*.gemspec'].first
+  spec = eval(File.read(gemspec_path))
+
+  result = `gem build #{gemspec_path} 2>&1`
+  if result =~ /Successfully built/
+    system "gem uninstall -x #{spec.name} 2>&1"
+    system "gem install #{spec.file_name} --no-rdoc --no-ri 2>&1"
+  else
+    raise result
+  end
 end
 
 desc 'takes the version in the gemspec creates a git tag and sends the gem to rubygems'
 task :release do
-  name, version = gemspec_details
-  system "git tag -f -a v#{version} -m 'Version #{version}'"
+  gemspec_path = Dir['*.gemspec'].first
+  spec = eval(File.read(gemspec_path))
+
+  system "git tag -f -a v#{spec.version} -m 'Version #{spec.version}'"
   system "git push --tags"
-  system "gem push #{name}-#{version}.gem"
-end
-
-def gem_name
-  name, version = gemspec_details
-  "#{name}-#{version}.gem"
-end
-
-def gemspec_details
-  gemspec = File.read('merrol.gemspec')
-  name = gemspec.scan(/s\.name.*=.*"(.*)"/).first.first
-  version = gemspec.scan(/s\.version.*=.*"(.*)"/).first.first
-  [name, version]
+  system "gem push #{spec.file_name}"
 end
 

@@ -1,4 +1,9 @@
-.rvmrc
 *.gem
+.rvmrc
+.yardoc
+
+doc
 coverage
+log
+tmp
 
