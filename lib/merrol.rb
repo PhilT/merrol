@@ -1,7 +1,7 @@
-require_relative  'prerequisites'
-
+require "bundler/setup"
 require 'gtk2'
 require 'gtksourceview2'
+require 'highline'
 require 'yaml'
 require 'active_support/inflector'
 require 'observer'
@@ -9,8 +9,11 @@ require 'observer'
 APP_NAME = "Merrol"
 WORKING_DIR = Dir.getwd
 
-require "#{File.dirname(__FILE__)}/merrol/controllers/controller"
-merrol_path = "#{File.dirname(__FILE__)}/merrol/**/*.rb"
-to_include = Dir[merrol_path]
-to_include.each { |file| require file unless file.include?('keyboard_map') }
+def excluded? file
+  file =~ /keyboard_map/
+end
+
+merrol_dir = File.join(File.direname(__FILE__), 'merrol')
+require File.join(merrol_dir, 'controllers', 'controller')
+Dir[File.join(merrol_dir, '**', '*.rb')].each { |file| require file unless excluded?(file)}
 
