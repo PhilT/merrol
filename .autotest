@@ -1,7 +1,0 @@
-unless ENV['INTEGRATION']
-  puts 'Not checking integration specs. run "INTEGRATION=true autotest" to include'
-  Autotest.add_hook :initialize do |at|
-    %w{.git vendor spec/integration}.each {|exception| at.add_exception(exception)}
-  end
-end
-

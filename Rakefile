@@ -1,62 +1,62 @@
-require 'rspec/core/rake_task'
+require 'rake/testtask'
+require './lib/merrol/lib/version.rb'
 
-desc 'tests, builds, installs and runs the app'
-task :default => [:coverage, :integration, :install] do
-  system 'm'
-end
+task :default => :all
+task :all => [:coverage, :unit, :coverage_off, :functional, :integration]
 
-desc 'runs the specs (except integration)'
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.pattern = [
-    './spec/controllers/*_spec.rb',
-    './spec/gtk/*_spec.rb',
-    './spec/lib/*_spec.rb',
-    './spec/models/*_spec.rb'
-  ]
-end
-
-desc 'Generate code coverage'
 task :coverage do
   ENV['COVERAGE'] = 'true'
-  Rake::Task['spec'].invoke
 end
 
-desc 'runs integration specs'
-RSpec::Core::RakeTask.new(:integration) do |t|
-  t.pattern = './spec/integration/*_spec.rb'
+task :coverage_off do
+  ENV['COVERAGE'] = nil
 end
 
-desc 'run local app. Loads application.rb by default. Override with f=file,file,file'
-task :run do
-  require_relative 'lib/merrol'
-  module Merrol
-    files = %w(lib/merrol/lib/application.rb README.md lib/merrol/lib/widget_builder.rb)
-    Application.new WORKING_DIR, (ENV['f'] && ENV['f'].split(',')) || files
-    Gtk.main
-  end
+Rake::TestTask.new(:unit) do |t|
+  t.ruby_opts << '-r./spec/spec_helper'
+  t.libs << 'spec'
+  t.test_files = FileList['spec/unit/**/*_spec.rb']
+end
+
+Rake::TestTask.new(:functional) do |t|
+  t.ruby_opts << '-r./spec/spec_helper'
+  t.libs << 'spec'
+  t.test_files = FileList['spec/functional/**/*_spec.rb']
+end
+
+Rake::TestTask.new(:integration) do |t|
+  t.ruby_opts << '-r./spec/integration_helper'
+  t.libs << 'spec'
+  t.test_files = FileList['spec/integration/**/*_spec.rb']
+end
+
+task :run do |t|
+  system 'ruby -Ilib bin/m'
+end
+
+def gemspec_path
+  Dir['*.gemspec'].first
+end
+
+def gem_path
+  "merrol-#{Merrol::VERSION}.gem"
 end
 
 desc 'Build and install the gem'
 task :install do
-  gemspec_path = Dir['*.gemspec'].first
-  spec = eval(File.read(gemspec_path))
-
   result = `gem build #{gemspec_path} 2>&1`
   if result =~ /Successfully built/
-    system "gem uninstall -x #{spec.name} 2>&1"
-    system "gem install #{spec.file_name} --no-rdoc --no-ri 2>&1"
+    system "gem uninstall -x merrol 2>&1"
+    system "gem install #{gem_path} --no-rdoc --no-ri 2>&1"
   else
     raise result
   end
 end
 
-desc 'takes the version in the gemspec creates a git tag and sends the gem to rubygems'
+desc 'Creates a git tag of gem version and sends the gem to rubygems'
 task :release do
-  gemspec_path = Dir['*.gemspec'].first
-  spec = eval(File.read(gemspec_path))
-
-  system "git tag -f -a v#{spec.version} -m 'Version #{spec.version}'"
+  system "git tag -f -a v#{Merrol::VERSION} -m 'Version #{Merrol::VERSION}'"
   system "git push --tags"
-  system "gem push #{spec.file_name}"
+  system "gem push #{gem_path}"
 end
 

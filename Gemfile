@@ -1,12 +1,10 @@
 source :rubygems
 
-gem 'activesupport'
 gem 'gtk2'
-gem 'highline'
+gem 'gtksourceview2'
 
 group :test do
-  gem 'guard'
-  gem 'guard-minitest'
+  gem 'fakefs'
   gem 'minitest'
   gem 'simplecov'
 end

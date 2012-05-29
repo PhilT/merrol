@@ -1,6 +1,0 @@
-match_path: _spec.rb$
-content: |
-  require 'spec_helper'
-
-  describe<>
-

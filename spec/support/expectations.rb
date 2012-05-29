@@ -1,46 +1,41 @@
-def shows widget_name
-  find_widget(widget_name).should be_visible
+def hides widget_name
+  find_widget(widget_name).wont_be :visible?
 end
 
-def does_not_show widget_name
-  find_widget(widget_name).should_not be_visible
+# shows 'text', :in => 'path.to.widget'
+# shows 'path.to.widget'
+# shows 'text', :for => :attribute, :in => 'path.to.widget'
+# shows ['item', 'item', 'item'], :in => 'path.to.list.widget'
+def shows text_or_name, options = {}
+  if options[:in] || options[:into]
+    widget = find_widget(options[:in] || options[:into])
+    match_text widget, text_or_name, options[:for] || :text
+  else
+    find_widget(text_or_name).must_be :visible?
+  end
 end
-alias hides does_not_show
 
-def displays expected, options = {}
-  widget = find_widget(options[:in] || options[:into], options[:test_against])
-
+def match_text widget, expected, attribute
   if widget.is_a?(Gtk::Image)
     text = widget.file
   elsif widget.is_a?(Gtk::TextView)
     text = widget.buffer.text
-  elsif widget.is_a?(Gtk::ListView)
-    text = []
-    widget.model.each { |model, path, iter| text << iter[0] }
-    text = text.join(',')
+  elsif widget.is_a?(Gtk::TreeView)
+    text = widget.model.inject([]) { |model, path, iter| text << iter[0] }.join(',')
     expected = expected.join(',')
   else
-    text = widget.text
+    text = widget.send(attribute)
   end
-  text.should match expected
+  text.must_match expected
 end
 
+# highlights 'selection', :in => 'path.to.widget'
 def highlights item, options = {}
-  widget = find_widget(options[:in] || options[:into], options[:test_against])
-  widget.selection.selected[0].should == item
+  widget = find_widget(options[:in])
+  widget.selection.selected[0].must_equal item
 end
 
-def loads contents, options = {}
-  displays contents, options
-end
-
-def saves contents, options = {}
-  File.read(options[:in]).should == contents
-end
-
-def quits_by_pressing key
-  $application.controllers['main'].should_receive(:quit)
-  pressing key, :in => find_widget(:main)
-  process_events
+def quits_application
+  $closing.must_equal true
 end
 

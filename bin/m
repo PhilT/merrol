@@ -3,7 +3,7 @@
 require 'merrol'
 
 module Merrol
-  Application.new
+  Application.new Gooy::Window.new 'merrol'
   Gtk.main
 end
 

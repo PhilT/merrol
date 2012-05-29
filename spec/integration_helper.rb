@@ -1,11 +1,14 @@
 require 'spec_helper'
-require 'support/setup'
+
+require 'support/base'
 require 'support/actions'
 require 'support/expectations'
 
-RSpec.configure do |c|
-  c.before(:all) do
-    $application = Application.new WORKING_DIR, [] unless $application
+module Gooy
+  class Window
+    def close
+      $closing = true
+    end
   end
 end
 

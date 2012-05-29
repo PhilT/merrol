@@ -1,7 +1,0 @@
-layout:
-  type: HBox
-  add_to: main
-  expand: false
-  fill: true
-  padding: 1
-

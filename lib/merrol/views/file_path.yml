@@ -1,8 +1,0 @@
-layout:
-  type: Label
-  add_to: status_bar
-  padding: 2
-
-options:
-  font: arial 9
-

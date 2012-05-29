@@ -1,6 +1,0 @@
-layout:
-  type: Image
-  add_to: status_bar
-  padding: 2
-  file: data/images/saved.svg
-

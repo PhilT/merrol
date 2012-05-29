@@ -1,4 +1,6 @@
 require 'base64'
+$LOAD_PATH << 'lib'
+require 'merrol/version.rb'
 
 @dependencies = []
 @development_dependencies = []
@@ -24,7 +26,7 @@ eval File.read('Gemfile')
 
 Gem::Specification.new do |s|
   s.name        = 'merrol'
-  s.version     = '0.0.0'
+  s.version     = Merrol::VERSION
   s.authors     = 'Phil Thompson'
   s.email       = Base64.decode64("cGhpbEBlbGVjdHJpY3Zpc2lvbnMuY29t\n")
   s.homepage    = 'http://merrol.com'

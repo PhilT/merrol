@@ -1,19 +1,12 @@
-require "bundler/setup"
 require 'gtk2'
 require 'gtksourceview2'
-require 'highline'
-require 'yaml'
-require 'active_support/inflector'
-require 'observer'
 
-APP_NAME = "Merrol"
-WORKING_DIR = Dir.getwd
+require 'merrol/lib/paths'
+require 'merrol/lib/version'
 
-def excluded? file
-  file =~ /keyboard_map/
+%w(widget container scroll_view window row column text_view shortcut).each do |file|
+  require "merrol/gooy/#{file}"
 end
 
-merrol_dir = File.join(File.direname(__FILE__), 'merrol')
-require File.join(merrol_dir, 'controllers', 'controller')
-Dir[File.join(merrol_dir, '**', '*.rb')].each { |file| require file unless excluded?(file)}
+require 'merrol/views/application'
 

@@ -1,9 +1,0 @@
-layout:
-  type: Window
-  icon: data/images/merrol.svg
-  container: VBox
-
-options:
-  default_position: 0, 0
-  default_size: 1000, 700
-
