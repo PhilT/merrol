@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'merrol'
+
+merrol = Merrol::Base.new
+merrol.run

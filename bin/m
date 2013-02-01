@@ -1,9 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'merrol'
-
-module Merrol
-  Application.new Gooy::Window.new 'merrol'
-  Gtk.main
-end
-

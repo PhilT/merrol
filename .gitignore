@@ -1,3 +1,4 @@
 *.gem
-coverage
-
+.bin
+.bundle
+tmp

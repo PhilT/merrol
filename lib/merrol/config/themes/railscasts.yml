@@ -1,0 +1,18 @@
+default:        [0xe6e1dc, 0x2b2b2b]
+panels:         [0xeeeeee, 0x5c5d57]
+current_line:   [0xe6e1dc, 0x333435]
+line_numbers:   [0x777777, 0x202020]
+comment:        0x666666
+todo:           [[0x666666, bold], nil]
+constant:       0x6d9cbe
+define:         0xcc7833
+module:         0xcc7833
+interpolation:  0x519F50
+error:          0x990000
+method:         0xffc66d
+identifier:     0xd0d0ff
+include:        0xcc7833
+keyword:        0xcc7833
+number:         0xa5c261
+string:         0xa5c261
+argument:       [[0xFD971F, italic], nil]

@@ -2,15 +2,7 @@ require 'rake/testtask'
 require './lib/merrol/lib/version.rb'
 
 task :default => :all
-task :all => [:coverage, :unit, :coverage_off, :functional, :integration]
-
-task :coverage do
-  ENV['COVERAGE'] = 'true'
-end
-
-task :coverage_off do
-  ENV['COVERAGE'] = nil
-end
+task :all => [:unit, :functional, :integration]
 
 Rake::TestTask.new(:unit) do |t|
   t.ruby_opts << '-r./spec/spec_helper'
@@ -31,7 +23,7 @@ Rake::TestTask.new(:integration) do |t|
 end
 
 task :run do |t|
-  system 'ruby -Ilib bin/m'
+  system 'ruby -Ilib bin/mer'
 end
 
 def gemspec_path

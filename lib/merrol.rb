@@ -1,12 +1,7 @@
-require 'gtk2'
-require 'gtksourceview2'
+require 'curses'
+require 'yaml'
+require 'ostruct'
 
-require 'merrol/lib/paths'
-require 'merrol/lib/version'
-
-%w(widget container scroll_view window row column text_view shortcut).each do |file|
-  require "merrol/gooy/#{file}"
+%w(version base keys theme screen).each do |path|
+  require "merrol/#{path}"
 end
-
-require 'merrol/views/application'
-
