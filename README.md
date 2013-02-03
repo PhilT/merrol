@@ -1,10 +1,32 @@
 Merrol - Minimalist Editor for Ruby, Rails and Other Languages
 
 
+Things I want in an editor
+===========================================================
+
+* Fuzzy open
+* Folder search / replace
+* Syntax highlighting
+* Switch between code/test quickly
+* Split screen (vertical & horizontal)
+* Small library of snippets
+* Highlighting and snippets for Ruby, MiniTest::Spec, HAML, SASS, JavaScript, Markdown
+* Trim trailing spaces
+* Single empty last line
+* Run commands or guard support
+* Bracket matching
+* Spell checker (for markdown)
+* Remember open files and layout on exit
+
+
+Sublime - Slow fuzzy open, slow code/test switcher, buggy snippets libraries, awkard plugin system, ensure_newline_at_eof_on_save should be run after trim trailing spaces,
+
+
+
 Planned Features
 ===========================================================
 
-* Designed with Test/Behaviour Driven Development in mind
+* Designed with Test/Behaviour Driven Development in mind (VAGUE)
 * Emphasis is on keyboard shortcuts over mouse, menus and toolbars
 * Panels are used over dialogs so code is not obscured
 * Switch between different layouts avoiding resizing of windows

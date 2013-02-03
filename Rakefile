@@ -1,5 +1,5 @@
 require 'rake/testtask'
-require './lib/merrol/lib/version.rb'
+require './lib/merrol/version.rb'
 
 task :default => :all
 task :all => [:unit, :functional, :integration]
